@@ -60,6 +60,10 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
+      "exclude_matches": [
+        "https://tibco87.github.io/*",
+        "https://*.github.io/*"
+      ],
       "js": ["content/content.js"],
       "run_at": "document_idle"
     },

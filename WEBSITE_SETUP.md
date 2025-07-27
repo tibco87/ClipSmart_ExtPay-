@@ -64,7 +64,7 @@ Pre funkčný kontaktný formulár potrebujete backend:
 **Možnosť B: Formspree**
 ```html
 <!-- V welcome.html -->
-<form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<form class="contact-form" id="contactForm" action="https://formspree.io/f/mqalbkko" method="POST">
 ```
 
 **Možnosť C: EmailJS**

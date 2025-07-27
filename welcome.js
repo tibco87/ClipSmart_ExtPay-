@@ -110,7 +110,6 @@ function addScrollAnimations() {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -119,39 +118,40 @@ function addScrollAnimations() {
             }
         });
     }, observerOptions);
-
     // Observe elements for animation
     const animatedElements = document.querySelectorAll('.feature-card, .pricing-card, .contact-form');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+    if (animatedElements && animatedElements.length > 0) {
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    }
 }
 
 // Initialize UI elements
 function initializeUI() {
     // Add hover effects to buttons
     const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
+    if (buttons && buttons.length > 0) {
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
         });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-
+    }
     // Add parallax effect to hero section
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero');
-        if (hero) {
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
             hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-    });
+        });
+    }
 }
 
 // Global functions for onclick handlers
@@ -187,15 +187,17 @@ function scrollToFeatures() {
 document.addEventListener('DOMContentLoaded', function() {
     // Add click effects to feature cards
     const featureCards = document.querySelectorAll('.feature-card');
-    featureCards.forEach(card => {
-        card.addEventListener('click', function() {
-            // Add a subtle click effect
-            this.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
+    if (featureCards && featureCards.length > 0) {
+        featureCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Add a subtle click effect
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
         });
-    });
+    }
 
     // Add typing effect to hero title
     const heroTitle = document.querySelector('.hero h1');
