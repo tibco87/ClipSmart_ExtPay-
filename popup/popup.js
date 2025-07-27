@@ -34,6 +34,7 @@ class ClipSmart {
         this.renderContent();
         this.updateItemCount();
         this.updateUIText();
+        this.updatePremiumModeCheckbox();
     }
 
     async initializeExtPay() {
@@ -68,6 +69,10 @@ class ClipSmart {
             
             this.isPro = user.paid;
             this.updateLimits();
+            this.updatePremiumModeCheckbox();
+            
+            // Save Pro status to storage
+            await chrome.storage.local.set({ isPro: this.isPro });
             
             // Set up periodic payment status check (alternative to onPaid callback)
             setInterval(async () => {
@@ -78,6 +83,11 @@ class ClipSmart {
                         this.isPro = user.paid;
                         this.updateLimits();
                         this.updateUIText();
+                        this.updatePremiumModeCheckbox();
+                        
+                        // Save Pro status to storage
+                        await chrome.storage.local.set({ isPro: this.isPro });
+                        
                         if (user.paid) {
                             this.showNotification('Premium mode activated!');
                         }
@@ -234,6 +244,9 @@ class ClipSmart {
             autoDeleteSelect.options[2].text = this.getMessage('sevenDays') || '7 days';
             autoDeleteSelect.options[3].text = this.getMessage('thirtyDays') || '30 days';
         }
+        
+        // Update premium mode checkbox after UI text update
+        this.updatePremiumModeCheckbox();
     }
 
     async loadData() {
@@ -243,8 +256,10 @@ class ClipSmart {
                 if (item.tags && Array.isArray(item.tags)) item.tags = new Set(item.tags);
                 return item;
             });
-            this.settings = data.settings || this.getDefaultSettings();
+            
+            // Load Pro status from storage (will be updated by ExtensionPay)
             this.isPro = data.isPro || false;
+            this.settings = data.settings || this.getDefaultSettings();
             this.translationsUsed = data.translationsUsed || 0;
             
             // Clean up old items based on auto-delete setting
@@ -729,7 +744,11 @@ class ClipSmart {
                 if (item.tags instanceof Set) newItem.tags = Array.from(item.tags);
                 return newItem;
             });
-            await chrome.storage.local.set({ clipboardItems: itemsToSave });
+            await chrome.storage.local.set({ 
+                clipboardItems: itemsToSave,
+                isPro: this.isPro,
+                translationsUsed: this.translationsUsed
+            });
         } catch (error) {
             console.error('Error saving data:', error);
         }
@@ -765,6 +784,9 @@ class ClipSmart {
         
         // Update translation quota
         this.updateTranslationQuota();
+        
+        // Update premium mode checkbox
+        this.updatePremiumModeCheckbox();
     }
 
     updateTranslationQuota() {
@@ -777,6 +799,38 @@ class ClipSmart {
                     <strong>${this.translationsUsed}/${this.freeTranslationLimit}</strong> ${this.getMessage('thisMonth') || 'this month'}
                 </span>
             `;
+        }
+    }
+
+    updatePremiumModeCheckbox() {
+        const premiumCheckbox = document.getElementById('premiumMode');
+        if (premiumCheckbox) {
+            // Temporarily remove event listener to prevent triggering toggle
+            const wasChecked = premiumCheckbox.checked;
+            premiumCheckbox.checked = this.isPro;
+            
+            // Update label text based on Pro status
+            const label = premiumCheckbox.nextElementSibling;
+            if (label && label.tagName === 'LABEL') {
+                if (this.isPro) {
+                    label.textContent = this.getMessage('premiumModeActive') || 'Premium Mode Active';
+                    label.style.color = '#28ca42';
+                    label.style.fontWeight = 'bold';
+                } else {
+                    label.textContent = this.getMessage('enablePremium') || 'Enable Premium Mode';
+                    label.style.color = '';
+                    label.style.fontWeight = '';
+                }
+            }
+            
+            // Update checkbox disabled state
+            premiumCheckbox.disabled = this.isPro;
+            
+            console.log('✅ Premium mode checkbox updated:', {
+                isPro: this.isPro,
+                checkboxChecked: premiumCheckbox.checked,
+                checkboxDisabled: premiumCheckbox.disabled
+            });
         }
     }
 

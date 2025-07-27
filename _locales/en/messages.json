@@ -242,6 +242,10 @@
     "message": "Enable Premium Mode",
     "description": "Enable premium mode label"
   },
+  "premiumModeActive": {
+    "message": "Premium Mode Active",
+    "description": "Premium mode active label"
+  },
   "premiumIncludes": {
     "message": "Premium features include:",
     "description": "Premium features include label"

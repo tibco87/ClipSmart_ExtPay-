@@ -56,6 +56,7 @@
   "shortest": { "message": "Nejméně znaků", "description": "Možnost řazení" },
   "premiumFeatures": { "message": "Prémiové funkce", "description": "Nadpis sekce prémiové funkce" },
   "enablePremium": { "message": "Aktivovat režim Premium", "description": "Štítek aktivovat premium" },
+  "premiumModeActive": { "message": "Premium režim aktivní", "description": "Štítek premium režim aktivní" },
   "premiumIncludes": { "message": "Prémiové funkce zahrnují:", "description": "Štítek prémiové funkce zahrnují" },
   "unlimitedHistory": { "message": "Neomezená historie", "description": "Funkce neomezené historie" },
   "exportTxtCsv": { "message": "Exportovat do TXT/CSV", "description": "Funkce exportu" },
