@@ -45,7 +45,7 @@ function handleContactForm() {
     submitBtn.disabled = true;
 
     // Send to Formspree
-    fetch('https://formspree.io/f/YOUR_NEW_ENDPOINT_ID', {
+    fetch('https://formspree.io/f/mqalbkko', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -80,6 +80,7 @@ function showNotification(message, type = 'info') {
     // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
+    notification.style.background = type === 'success' ? '#28ca42' : type === 'error' ? '#ff4757' : '#667eea';
     notification.innerHTML = `
         <div class="notification-content">
             <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
@@ -90,42 +91,7 @@ function showNotification(message, type = 'info') {
         </div>
     `;
 
-    // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: ${type === 'success' ? '#28ca42' : type === 'error' ? '#ff4757' : '#667eea'};
-        color: white;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        z-index: 10000;
-        max-width: 400px;
-        animation: slideIn 0.3s ease;
-    `;
-
-    // Add animation styles
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .notification-content button {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            margin-left: auto;
-        }
-    `;
-    document.head.appendChild(style);
+    // CSS styles are now in welcome.css
 
     // Add to page
     document.body.appendChild(notification);
