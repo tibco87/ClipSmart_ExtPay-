@@ -45,7 +45,7 @@ function handleContactForm() {
     submitBtn.disabled = true;
 
     // Send to Formspree
-    fetch('https://formspree.io/f/xpzgwqjz', {
+    fetch('https://formspree.io/f/YOUR_NEW_ENDPOINT_ID', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function handleContactForm() {
     })
     .catch(error => {
         console.error('Error:', error);
-        showNotification('Sorry, there was an error sending your message. Please try again or contact us directly at tibco87@gmail.com', 'error');
+        showNotification('Sorry, there was an error sending your message. Please try again or contact us directly at tkutik72@gmail.com', 'error');
     })
     .finally(() => {
         // Reset button

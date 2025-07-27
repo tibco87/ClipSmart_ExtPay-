@@ -44,7 +44,7 @@ V súboroch nahraďte placeholder URL adresy:
 ```javascript
 // V welcome.html a privacy.html
 // Nahraďte:
-tibco87@gmail.com
+tkutik72@gmail.com
 https://tibco87.github.io/ClipSmart_ExtPay-
 
 // Skutočnými hodnotami:
@@ -204,7 +204,7 @@ Sentry.init({
 ## 📞 **Podpora:**
 
 ### **Kontaktné informácie:**
-- Email: tibco87@gmail.com
+- Email: tkutik72@gmail.com
 - Response time: 24 hodín
 - Dokumentácia: README.md
 
