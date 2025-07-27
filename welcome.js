@@ -44,18 +44,31 @@ function handleContactForm() {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
 
-    // Simulate form submission (replace with actual backend endpoint)
-    setTimeout(() => {
-        // Show success message
-        showNotification('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.', 'success');
-        
-        // Reset form
-        form.reset();
-        
+    // Send to Formspree
+    fetch('https://formspree.io/f/xpzgwqjz', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            showNotification('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.', 'success');
+            form.reset();
+        } else {
+            throw new Error('Failed to send message');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Sorry, there was an error sending your message. Please try again or contact us directly at tibco87@gmail.com', 'error');
+    })
+    .finally(() => {
         // Reset button
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-    }, 2000);
+    });
 }
 
 // Show notification
@@ -69,7 +82,7 @@ function showNotification(message, type = 'info') {
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
         <div class="notification-content">
-            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
             <span>${message}</span>
             <button onclick="this.parentElement.parentElement.remove()">
                 <i class="fas fa-times"></i>
@@ -82,7 +95,7 @@ function showNotification(message, type = 'info') {
         position: fixed;
         top: 100px;
         right: 20px;
-        background: ${type === 'success' ? '#28ca42' : '#667eea'};
+        background: ${type === 'success' ? '#28ca42' : type === 'error' ? '#ff4757' : '#667eea'};
         color: white;
         padding: 15px 20px;
         border-radius: 10px;
