@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtensionPay Test</title>
+</head>
+<body>
+    <h1>ExtensionPay Test</h1>
+    <div id="status">Loading...</div>
+    <button id="testButton" style="display: none;">Test ExtensionPay</button>
+    
+    <script src="extensionpay-config.js"></script>
+    <script src="js/extpay.js"></script>
+    <script>
+        // Test ExtensionPay loading
+        document.addEventListener('DOMContentLoaded', async () => {
+            const statusDiv = document.getElementById('status');
+            const testButton = document.getElementById('testButton');
+            
+            try {
+                // Check if ExtensionPay is loaded
+                if (window.ExtPay) {
+                    statusDiv.textContent = '✅ ExtensionPay loaded successfully';
+                    statusDiv.style.color = 'green';
+                    
+                    // Test ExtensionPay initialization
+                    const extpay = window.ExtPay('test-extension-id');
+                    statusDiv.textContent += '\n✅ ExtensionPay initialized';
+                    
+                    // Test getting user
+                    try {
+                        const user = await extpay.getUser();
+                        statusDiv.textContent += `\n✅ User data: ${JSON.stringify(user, null, 2)}`;
+                    } catch (error) {
+                        statusDiv.textContent += `\n⚠️ User data error: ${error.message}`;
+                    }
+                    
+                    // Show test button
+                    testButton.style.display = 'block';
+                    
+                } else {
+                    statusDiv.textContent = '❌ ExtensionPay not loaded';
+                    statusDiv.style.color = 'red';
+                }
+            } catch (error) {
+                statusDiv.textContent = `❌ Error: ${error.message}`;
+                statusDiv.style.color = 'red';
+            }
+        });
+        
+        // Test button click
+        document.getElementById('testButton').addEventListener('click', async () => {
+            const extpay = window.ExtPay('test-extension-id');
+            try {
+                const plans = await extpay.getPlans();
+                alert(`Plans: ${JSON.stringify(plans, null, 2)}`);
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Script Test</title>
+</head>
+<body>
+    <h1>Background Script Test</h1>
+    <div id="status">Testing...</div>
+    
+    <script>
+        // Simulate service worker environment
+        const self = {};
+        
+        // Load ExtensionPay
+        const script1 = document.createElement('script');
+        script1.src = 'extensionpay-config.js';
+        document.head.appendChild(script1);
+        
+        script1.onload = () => {
+            const script2 = document.createElement('script');
+            script2.src = 'js/extpay.js';
+            document.head.appendChild(script2);
+            
+            script2.onload = () => {
+                const statusDiv = document.getElementById('status');
+                
+                try {
+                    if (typeof self.ExtPay !== 'undefined') {
+                        statusDiv.innerHTML = '✅ ExtensionPay available in service worker context<br>';
+                        statusDiv.innerHTML += '✅ Background script should work correctly';
+                        statusDiv.style.color = 'green';
+                    } else {
+                        statusDiv.innerHTML = '❌ ExtensionPay not available in service worker context<br>';
+                        statusDiv.innerHTML += 'Available globals: ' + Object.keys(self).filter(key => key.includes('Ext')).join(', ');
+                        statusDiv.style.color = 'red';
+                    }
+                } catch (error) {
+                    statusDiv.innerHTML = '❌ Error: ' + error.message;
+                    statusDiv.style.color = 'red';
+                }
+            };
+        };
+    </script>
+</body>
+</html> 

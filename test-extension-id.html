@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtensionPay ID Test</title>
+</head>
+<body>
+    <h1>ExtensionPay ID Test</h1>
+    <div id="status">Testing...</div>
+    <button id="testPayment" style="display: none;">Test Payment</button>
+    
+    <script src="extensionpay-config.js"></script>
+    <script src="js/extpay.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const statusDiv = document.getElementById('status');
+            const testButton = document.getElementById('testPayment');
+            
+            try {
+                // Test ExtensionPay with dashboard ID
+                const dashboardId = 'biijlghfcgccgokncemdmjodpelojhki';
+                const extpay = window.ExtPay(dashboardId);
+                
+                statusDiv.innerHTML = `
+                    <h3>ExtensionPay Configuration:</h3>
+                    <p><strong>Dashboard ID:</strong> ${dashboardId}</p>
+                    <p><strong>Config ID:</strong> ${window.EXTPAY_CONFIG?.extensionId || 'Not found'}</p>
+                    <p><strong>ExtPay Available:</strong> ${typeof window.ExtPay}</p>
+                `;
+                
+                // Test getting user
+                try {
+                    const user = await extpay.getUser();
+                    statusDiv.innerHTML += `
+                        <h3>User Data:</h3>
+                        <pre>${JSON.stringify(user, null, 2)}</pre>
+                    `;
+                } catch (error) {
+                    statusDiv.innerHTML += `
+                        <h3>User Data Error:</h3>
+                        <p style="color: red;">${error.message}</p>
+                    `;
+                }
+                
+                // Test getting plans
+                try {
+                    const plans = await extpay.getPlans();
+                    statusDiv.innerHTML += `
+                        <h3>Available Plans:</h3>
+                        <pre>${JSON.stringify(plans, null, 2)}</pre>
+                    `;
+                } catch (error) {
+                    statusDiv.innerHTML += `
+                        <h3>Plans Error:</h3>
+                        <p style="color: red;">${error.message}</p>
+                    `;
+                }
+                
+                // Show test button
+                testButton.style.display = 'block';
+                
+                // Test payment button
+                testButton.addEventListener('click', async () => {
+                    try {
+                        console.log('Testing payment page...');
+                        await extpay.openPaymentPage('clipsmart-pro');
+                        console.log('Payment page opened successfully');
+                        statusDiv.innerHTML += '<p style="color: green;">✅ Payment page opened successfully!</p>';
+                    } catch (error) {
+                        console.error('Payment test error:', error);
+                        statusDiv.innerHTML += `<p style="color: red;">❌ Payment error: ${error.message}</p>`;
+                    }
+                });
+                
+            } catch (error) {
+                statusDiv.innerHTML = `<p style="color: red;">❌ Error: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html> 
