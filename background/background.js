@@ -68,31 +68,31 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     }
 });
 
-// Handle clipboard monitoring
-let clipboardMonitor = {
-    lastText: '',
-    
-    async checkClipboard() {
-        try {
-            // Získaj aktívny tab
-            const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-            if (!tab || !tab.id) return;
+    // Handle clipboard monitoring
+    let clipboardMonitor = {
+        lastText: '',
+        
+        async checkClipboard() {
+            try {
+                // Získaj aktívny tab
+                const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+                if (!tab || !tab.id) return;
 
-            // Pošli správu content scriptu, aby prečítal schránku
-            chrome.tabs.sendMessage(tab.id, { action: "getClipboardText" }, async (response) => {
-                if (chrome.runtime.lastError) {
-                    // Content script nie je načítaný v tomto tabe, ignoruj chybu
-                    return;
-                }
-                const text = response?.text;
-                if (text && text !== this.lastText) {
-                    await this.addItem(text);
-                }
-            });
-        } catch (error) {
-            console.error('Clipboard check error:', error);
-        }
-    },
+                // Pošli správu content scriptu, aby prečítal schránku
+                chrome.tabs.sendMessage(tab.id, { action: "getClipboardText" }, async (response) => {
+                    if (chrome.runtime.lastError) {
+                        // Content script nie je načítaný v tomto tabe, ignoruj chybu
+                        return;
+                    }
+                    const text = response?.text;
+                    if (text && text !== this.lastText) {
+                        await this.addItem(text);
+                    }
+                });
+            } catch (error) {
+                console.error('Clipboard check error:', error);
+            }
+        },
 
     async addItem(text) {
         if (!text || text === this.lastText) return;
@@ -212,6 +212,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else if (request.action === 'updateBadge') {
         clipboardMonitor.updateBadge(request.count);
         sendResponse({ success: true });
+    } else if (request.action === 'urlChanged') {
+        // Handle URL changes - could be used for tracking navigation
+        console.log('URL changed:', request.url);
+        sendResponse({ success: true });
     }
 });
 
@@ -221,6 +225,8 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         clipboardMonitor.addItem(info.selectionText);
     }
 });
+
+
 
 // Handle keyboard shortcuts
 chrome.commands.onCommand.addListener(async (command) => {

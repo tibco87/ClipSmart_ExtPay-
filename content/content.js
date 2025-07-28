@@ -122,3 +122,20 @@ document.addEventListener('keydown', (event) => {
         chrome.runtime.sendMessage({ action: 'openPopup' });
     }
 });
+
+// Monitor URL changes and send to background script
+let lastUrl = window.location.href;
+const observer = new MutationObserver(() => {
+    const currentUrl = window.location.href;
+    if (currentUrl !== lastUrl) {
+        lastUrl = currentUrl;
+        // Send URL change to background script
+        chrome.runtime.sendMessage({
+            action: 'urlChanged',
+            url: currentUrl
+        });
+    }
+});
+
+// Start observing URL changes
+observer.observe(document, { subtree: true, childList: true });
