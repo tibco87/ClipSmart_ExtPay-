@@ -1,8 +1,8 @@
 // ExtensionPay Configuration for ClipSmart
 // This file contains configuration for ExtensionPay integration
 
-// Extension ID from ExtensionPay dashboard
-const EXTENSION_ID = 'biijlghfcgccgokncemdmjodpelojhki';
+// Extension ID from Chrome Web Store (PRODUCTION)
+const EXTENSION_ID = 'nbpndheaoecmgnlmfpleeahoicpcbppj';
 
 // ExtensionPay configuration
 const EXTPAY_CONFIG = {
