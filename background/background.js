@@ -27,11 +27,11 @@ chrome.runtime.onInstalled.addListener(async (details) => {
         chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });
     }
 
-    // Initialize ExtensionPay
+            // Initialize ExtensionPay
     setTimeout(() => {
         if (typeof self.ExtPay !== 'undefined') {
-            // Use the ExtensionPay dashboard ID, not Chrome's generated ID
-            const extensionPayId = 'biijlghfcgccgokncemdmjodpelojhki';
+            // Use the production Extension ID from Chrome Web Store
+            const extensionPayId = 'nbpndheaoecmgnlmfpleeahoicpcbppj';
             const extpay = self.ExtPay(extensionPayId);
             extpay.startBackground();
             console.log('✅ ExtensionPay initialized in background with ID:', extensionPayId);

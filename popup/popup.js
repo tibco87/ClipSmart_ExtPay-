@@ -58,8 +58,8 @@ class ClipSmart {
         
         try {
             // ExtensionPay is available globally
-            // Use the ExtensionPay dashboard ID, not Chrome's generated ID
-            const extensionPayId = window.EXTPAY_CONFIG?.extensionId || 'biijlghfcgccgokncemdmjodpelojhki';
+            // Use the production Extension ID from Chrome Web Store
+            const extensionPayId = window.EXTPAY_CONFIG?.extensionId || 'nbpndheaoecmgnlmfpleeahoicpcbppj';
             this.extpay = window.ExtPay(extensionPayId);
             console.log('✅ ExtensionPay initialized with ID:', extensionPayId);
             console.log('ℹ️ Using ExtensionPay dashboard ID, not Chrome generated ID');
@@ -355,6 +355,11 @@ class ClipSmart {
         });
 
         // Links
+        document.getElementById('welcomeLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });
+        });
+
         document.getElementById('privacyLink').addEventListener('click', (e) => {
             e.preventDefault();
             chrome.tabs.create({ url: 'https://tibco87.github.io/ClipSmart_ExtPay-/privacy.html' });

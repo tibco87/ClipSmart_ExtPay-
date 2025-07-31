@@ -72,5 +72,12 @@
       "js": ["js/extpay.js"],
       "run_at": "document_start"
     }
+  ],
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["welcome.html", "welcome.css", "welcome.js", "privacy.html", "privacy.css", "privacy.js"],
+      "matches": ["<all_urls>"]
+    }
   ]
 }
