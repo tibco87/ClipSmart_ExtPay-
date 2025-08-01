@@ -99,6 +99,10 @@
     "message": "Support",
     "description": "Support link"
   },
+  "items": {
+    "message": "items",
+    "description": "Items count label"
+  },
   "upgradePro": {
     "message": "Upgrade Pro",
     "description": "Upgrade to Pro button text"

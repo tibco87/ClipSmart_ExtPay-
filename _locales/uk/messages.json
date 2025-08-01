@@ -79,5 +79,9 @@
   "unlimitedTranslationsPro": {
     "message": "Необмежені переклади з Pro!",
     "description": "Банер або кнопка для необмежених перекладів у версії Pro"
+  },
+  "items": {
+    "message": "елементів",
+    "description": "Items count label"
   }
 } 

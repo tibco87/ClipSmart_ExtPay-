@@ -79,5 +79,9 @@
   "unlimitedTranslationsPro": {
     "message": "प्रो के साथ असीमित अनुवाद!",
     "description": "प्रो संस्करण के साथ असीमित अनुवाद के लिए बैनर या बटन"
+  },
+  "items": {
+    "message": "आइटम",
+    "description": "Items count label"
   }
 } 

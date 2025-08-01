@@ -79,5 +79,9 @@
   "unlimitedTranslationsPro": {
     "message": "专业版无限翻译！",
     "description": "专业版无限翻译的横幅或按钮"
+  },
+  "items": {
+    "message": "项",
+    "description": "Items count label"
   }
 } 

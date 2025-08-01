@@ -329,5 +329,9 @@
   "unlimitedTranslationsPro": {
     "message": "Traductions illimitées avec Pro !",
     "description": "Bannière ou bouton pour traductions illimitées avec la version Pro"
+  },
+  "items": {
+    "message": "éléments",
+    "description": "Items count label"
   }
 } 

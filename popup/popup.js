@@ -214,6 +214,10 @@ class ClipSmart {
         const sortByLabel = document.getElementById('sortByLabel');
         if (sortByLabel) sortByLabel.textContent = this.getMessage('sortBy') || 'Sort by:';
         
+        // Items label
+        const itemsLabel = document.getElementById('itemsLabel');
+        if (itemsLabel) itemsLabel.textContent = this.getMessage('items') || 'items';
+        
         // Sort options
         const sortSelect = document.getElementById('sortSelect');
         if (sortSelect) {
