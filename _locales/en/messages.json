@@ -101,7 +101,19 @@
   },
   "upgradePro": {
     "message": "Upgrade Pro",
-    "description": "Upgrade Pro button label"
+    "description": "Upgrade to Pro button text"
+  },
+  "manageSubscription": {
+    "message": "Manage Subscription",
+    "description": "Manage subscription button text for Pro users"
+  },
+  "upgradeProTooltip": {
+    "message": "Upgrade to Pro for unlimited features",
+    "description": "Tooltip for upgrade button"
+  },
+  "manageSubscriptionTooltip": {
+    "message": "Manage your Pro subscription",
+    "description": "Tooltip for manage subscription button"
   },
   "copied": {
     "message": "Copied to clipboard!",

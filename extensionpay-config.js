@@ -13,7 +13,7 @@ const EXTPAY_CONFIG = {
     plans: {
         clipsmart_pro: {
             nickname: 'clipsmart-pro',
-            price: 4.99,
+            price: 3.99,
             currency: 'EUR',
             interval: 'month'
         }
@@ -23,7 +23,7 @@ const EXTPAY_CONFIG = {
     limits: {
         free: {
             items: 20,
-            translationsPerDay: 50,
+            translationsPerDay: 10,
             exportFormats: ['txt'],
             tags: false
         },

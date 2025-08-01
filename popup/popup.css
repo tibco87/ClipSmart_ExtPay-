@@ -484,6 +484,18 @@ body {
     box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
 }
 
+/* Pro active button styles */
+.upgrade-button.pro-active {
+    background: #28ca42;
+    color: white;
+}
+
+.upgrade-button.pro-active:hover {
+    background: #24b33a;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(40, 202, 66, 0.3);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 6px;

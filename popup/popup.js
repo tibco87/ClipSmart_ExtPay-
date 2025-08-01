@@ -14,7 +14,7 @@ class ClipSmart {
         this.defaultTransLangs = ['en', 'de', 'fr'];
         this.tags = new Set();
         this.translationLimit = 10; // Translation limit for free version
-        this.availableLanguages = ['en', 'de', 'fr', 'es', 'pl', 'cs', 'uk', 'zh', 'ko', 'ja', 'hi'];
+        this.availableLanguages = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
         this.sortOrder = 'newest';
         this.locale = 'en';
         this.messages = {};
@@ -38,12 +38,9 @@ class ClipSmart {
     }
 
     async initializeExtPay() {
-        console.log('🔧 Initializing ExtensionPay...');
-        
-        // Wait for ExtensionPay to be available
+        // Wait for ExtensionPay to load
         let retries = 0;
         while (!window.ExtPay && retries < 10) {
-            console.log(`⏳ Waiting for ExtensionPay... (${retries + 1}/10)`);
             await new Promise(resolve => setTimeout(resolve, 100));
             retries++;
         }
@@ -64,12 +61,16 @@ class ClipSmart {
             console.log('✅ ExtensionPay initialized with ID:', extensionPayId);
             console.log('ℹ️ Using ExtensionPay dashboard ID, not Chrome generated ID');
             
+            // Synchronize ExtensionPay data with our isPro status
+            await this.syncExtensionPayData();
+            
             const user = await this.extpay.getUser();
             console.log('✅ User data retrieved:', user);
             
             this.isPro = user.paid;
             this.updateLimits();
             this.updatePremiumModeCheckbox();
+            this.updateUpgradeButton();
             
             // Save Pro status to storage
             await chrome.storage.local.set({ isPro: this.isPro });
@@ -84,6 +85,7 @@ class ClipSmart {
                         this.updateLimits();
                         this.updateUIText();
                         this.updatePremiumModeCheckbox();
+                        this.updateUpgradeButton();
                         
                         // Save Pro status to storage
                         await chrome.storage.local.set({ isPro: this.isPro });
@@ -103,10 +105,50 @@ class ClipSmart {
         }
     }
 
+    // New function to synchronize ExtensionPay data
+    async syncExtensionPayData() {
+        try {
+            // Check ExtensionPay storage (both sync and local)
+            const syncData = await chrome.storage.sync.get(['extensionpay_user', 'extensionpay_api_key']);
+            const localData = await chrome.storage.local.get(['extensionpay_user', 'extensionpay_api_key']);
+            
+            // Use whichever storage has the data
+            const extensionpayUser = syncData.extensionpay_user || localData.extensionpay_user;
+            const extensionpayApiKey = syncData.extensionpay_api_key || localData.extensionpay_api_key;
+            
+            console.log('🔍 ExtensionPay data found:', {
+                user: extensionpayUser ? 'Yes' : 'No',
+                apiKey: extensionpayApiKey ? 'Yes' : 'No'
+            });
+            
+            // If we have ExtensionPay data, ensure it's in both storages
+            if (extensionpayUser && !syncData.extensionpay_user) {
+                await chrome.storage.sync.set({ extensionpay_user: extensionpayUser });
+                console.log('✅ Synced extensionpay_user to sync storage');
+            }
+            
+            if (extensionpayApiKey && !syncData.extensionpay_api_key) {
+                await chrome.storage.sync.set({ extensionpay_api_key: extensionpayApiKey });
+                console.log('✅ Synced extensionpay_api_key to sync storage');
+            }
+            
+            // If we have user data, check if they're paid
+            if (extensionpayUser && extensionpayUser.paid) {
+                console.log('💰 Found paid user in ExtensionPay data');
+                this.isPro = true;
+                await chrome.storage.local.set({ isPro: true });
+                console.log('✅ Updated isPro status to true');
+            }
+            
+        } catch (error) {
+            console.error('❌ Error syncing ExtensionPay data:', error);
+        }
+    }
+
     updateLimits() {
         const config = window.EXTPAY_CONFIG || {
             limits: {
-                free: { items: 20, translationsPerDay: 50 },
+                free: { items: 20, translationsPerDay: 10 },
                 premium: { items: Infinity, translationsPerDay: Infinity }
             }
         };
@@ -156,22 +198,23 @@ class ClipSmart {
     }
 
     updateUIText() {
-        // Header
-        document.querySelector('.logo-text').textContent = this.getMessage('appName');
-        document.title = this.getMessage('appName');
-        // Počet položiek
-        document.getElementById('itemCount').textContent = this.clipboardItems.length;
-        if (document.getElementById('itemCount').nextSibling) {
-            document.getElementById('itemCount').nextSibling.textContent = ' ' + (this.getMessage('items') || 'items');
-        }
-        // Tabs
-        document.querySelector('[data-tab="recent"]').textContent = this.getMessage('recent');
-        document.querySelector('[data-tab="pinned"]').textContent = this.getMessage('pinned');
-        document.querySelector('[data-tab="settings"]').textContent = this.getMessage('settings');
-        // Search
-        document.getElementById('searchInput').placeholder = this.getMessage('searchPlaceholder');
-        // Sort
-        document.querySelector('.sort-label').textContent = this.getMessage('sortBy') || 'Sort by:';
+        // Tab buttons
+        const recentTab = document.querySelector('[data-tab="recent"]');
+        if (recentTab) recentTab.textContent = this.getMessage('recent') || 'Recent';
+        const pinnedTab = document.querySelector('[data-tab="pinned"]');
+        if (pinnedTab) pinnedTab.textContent = this.getMessage('pinned') || 'Pinned';
+        const settingsTab = document.querySelector('[data-tab="settings"]');
+        if (settingsTab) settingsTab.textContent = this.getMessage('settings') || 'Settings';
+        
+        // Search placeholder
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.placeholder = this.getMessage('searchPlaceholder') || 'Search clipboard...';
+        
+        // Sort by label
+        const sortByLabel = document.getElementById('sortByLabel');
+        if (sortByLabel) sortByLabel.textContent = this.getMessage('sortBy') || 'Sort by:';
+        
+        // Sort options
         const sortSelect = document.getElementById('sortSelect');
         if (sortSelect) {
             sortSelect.options[0].text = this.getMessage('newest') || 'Newest';
@@ -181,22 +224,24 @@ class ClipSmart {
             sortSelect.options[4].text = this.getMessage('longest') || 'Most characters';
             sortSelect.options[5].text = this.getMessage('shortest') || 'Fewest characters';
         }
-        // Empty state
-        const emptyText = document.querySelector('#recentEmpty .empty-text');
-        if (emptyText) emptyText.textContent = this.getMessage('noClipboardItems');
-        const emptySub = document.querySelector('#recentEmpty .empty-subtext');
-        if (emptySub) emptySub.textContent = this.getMessage('copyToGetStarted');
-        // Pinned empty state
+        
+        // Empty states
+        const recentEmptyText = document.querySelector('#recentEmpty .empty-text');
+        if (recentEmptyText) recentEmptyText.textContent = this.getMessage('noClipboardItems');
+        const recentEmptySub = document.querySelector('#recentEmpty .empty-subtext');
+        if (recentEmptySub) recentEmptySub.textContent = this.getMessage('copyToGetStarted');
         const pinnedEmptyText = document.querySelector('#pinnedEmpty .empty-text');
         if (pinnedEmptyText) pinnedEmptyText.textContent = this.getMessage('noPinnedItems');
         const pinnedEmptySub = document.querySelector('#pinnedEmpty .empty-subtext');
         if (pinnedEmptySub) pinnedEmptySub.textContent = this.getMessage('pinFavorites');
-        // Upgrade button
-        const upgradeBtn = document.getElementById('upgradeButton');
-        if (upgradeBtn) upgradeBtn.textContent = this.getMessage('upgradePro') || 'Upgrade Pro';
+        
+        // Update upgrade button based on Pro status
+        this.updateUpgradeButton();
+        
         // Theme toggle tooltip
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) themeToggle.title = this.getMessage('toggleTheme') || 'Toggle theme';
+        
         // Settings sekcie
         const settingsTitles = document.querySelectorAll('.settings-title');
         if (settingsTitles[0]) settingsTitles[0].textContent = this.getMessage('appearance');
@@ -205,20 +250,24 @@ class ClipSmart {
         if (settingsTitles[3]) settingsTitles[3].textContent = this.getMessage('translation');
         if (settingsTitles[4]) settingsTitles[4].textContent = this.getMessage('about');
         if (settingsTitles[5]) settingsTitles[5].textContent = this.getMessage('premiumFeatures') || 'Premium Features';
+        
         // Settings labels
         const settingLabels = document.querySelectorAll('.setting-label');
         if (settingLabels[0]) settingLabels[0].textContent = this.getMessage('theme');
         if (settingLabels[1]) settingLabels[1].textContent = this.getMessage('interfaceLanguage');
         if (settingLabels[2]) settingLabels[2].textContent = this.getMessage('autoDeleteAfter');
         if (settingLabels[3]) settingLabels[3].textContent = this.getMessage('defaultLanguages');
+        
         // Clear all button
         const clearBtn = document.getElementById('clearAllButton');
         if (clearBtn) clearBtn.textContent = this.getMessage('clearAllItems');
+        
         // Privacy & Support
         const privacyLink = document.getElementById('privacyLink');
         if (privacyLink) privacyLink.textContent = this.getMessage('privacyPolicy');
         const supportLink = document.getElementById('supportLink');
         if (supportLink) supportLink.textContent = this.getMessage('support');
+        
         // Premium sekcia
         const premiumLabel = document.querySelector('label[for="premiumMode"]');
         if (premiumLabel) premiumLabel.textContent = this.getMessage('enablePremium');
@@ -229,6 +278,7 @@ class ClipSmart {
         if (premiumList[1]) premiumList[1].textContent = this.getMessage('exportTxtCsv');
         if (premiumList[2]) premiumList[2].textContent = this.getMessage('advancedTagging');
         if (premiumList[3]) premiumList[3].textContent = this.getMessage('unlimitedTranslations');
+        
         // Theme select options
         const themeSelect = document.getElementById('themeSelect');
         if (themeSelect) {
@@ -236,6 +286,7 @@ class ClipSmart {
             themeSelect.options[1].text = this.getMessage('themeLight') || 'Light';
             themeSelect.options[2].text = this.getMessage('themeDark') || 'Dark';
         }
+        
         // Auto-delete select options
         const autoDeleteSelect = document.getElementById('autoDeleteSelect');
         if (autoDeleteSelect) {
@@ -247,6 +298,24 @@ class ClipSmart {
         
         // Update premium mode checkbox after UI text update
         this.updatePremiumModeCheckbox();
+    }
+
+    // New function to update upgrade button based on Pro status
+    updateUpgradeButton() {
+        const upgradeBtn = document.getElementById('upgradeButton');
+        if (!upgradeBtn) return;
+        
+        if (this.isPro) {
+            // User is Pro - show "Manage Subscription"
+            upgradeBtn.textContent = this.getMessage('manageSubscription') || 'Manage Subscription';
+            upgradeBtn.className = 'upgrade-button pro-active';
+            upgradeBtn.title = this.getMessage('manageSubscriptionTooltip') || 'Manage your Pro subscription';
+        } else {
+            // User is not Pro - show "Upgrade Pro"
+            upgradeBtn.textContent = this.getMessage('upgradePro') || 'Upgrade Pro';
+            upgradeBtn.className = 'upgrade-button';
+            upgradeBtn.title = this.getMessage('upgradeProTooltip') || 'Upgrade to Pro for unlimited features';
+        }
     }
 
     async loadData() {
@@ -262,10 +331,41 @@ class ClipSmart {
             this.settings = data.settings || this.getDefaultSettings();
             this.translationsUsed = data.translationsUsed || 0;
             
+            // Check ExtensionPay data to ensure isPro is correct
+            await this.checkExtensionPayStatus();
+            
             // Clean up old items based on auto-delete setting
             await this.cleanupOldItems();
         } catch (error) {
             console.error('Error loading data:', error);
+        }
+    }
+
+    // New function to check ExtensionPay status
+    async checkExtensionPayStatus() {
+        try {
+            // Check ExtensionPay storage for user data
+            const syncData = await chrome.storage.sync.get(['extensionpay_user']);
+            const localData = await chrome.storage.local.get(['extensionpay_user']);
+            
+            const extensionpayUser = syncData.extensionpay_user || localData.extensionpay_user;
+            
+            if (extensionpayUser && extensionpayUser.paid && !this.isPro) {
+                console.log('💰 Found paid user in ExtensionPay data, updating isPro status');
+                this.isPro = true;
+                await chrome.storage.local.set({ isPro: true });
+                console.log('✅ Updated isPro status to true from ExtensionPay data');
+                this.updateUpgradeButton();
+            } else if (extensionpayUser && !extensionpayUser.paid && this.isPro) {
+                console.log('⚠️ User is not paid in ExtensionPay data, updating isPro status');
+                this.isPro = false;
+                await chrome.storage.local.set({ isPro: false });
+                console.log('✅ Updated isPro status to false from ExtensionPay data');
+                this.updateUpgradeButton();
+            }
+            
+        } catch (error) {
+            console.error('❌ Error checking ExtensionPay status:', error);
         }
     }
 
@@ -283,7 +383,7 @@ class ClipSmart {
             theme: 'auto',
             language: 'en',
             autoDelete: 'never',
-            translationLangs: ['en', 'de', 'fr', 'es', 'ru', 'uk', 'zh', 'ja', 'hi', 'pl', 'cs']
+            translationLangs: ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi']
         };
     }
 
@@ -324,7 +424,7 @@ class ClipSmart {
         });
 
         // Translation language selects
-        const langCodes = ['en', 'de', 'fr', 'es', 'ru', 'uk', 'zh', 'ja', 'hi', 'pl', 'cs'];
+        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
         ['transLang1', 'transLang2', 'transLang3'].forEach((id, index) => {
             const select = document.getElementById(id);
             // Vymaž existujúce možnosti
@@ -351,7 +451,13 @@ class ClipSmart {
 
         // Upgrade button
         document.getElementById('upgradeButton').addEventListener('click', () => {
-            this.togglePremiumMode(true);
+            if (this.isPro) {
+                // User is Pro - open subscription management
+                this.manageSubscription();
+            } else {
+                // User is not Pro - upgrade to Pro
+                this.togglePremiumMode(true);
+            }
         });
 
         // Links
@@ -642,13 +748,17 @@ class ClipSmart {
                     <option value="de">German</option>
                     <option value="fr">French</option>
                     <option value="es">Spanish</option>
-                    <option value="ru">Russian</option>
+                    <option value="it">Italian</option>
+                    <option value="pl">Polish</option>
+                    <option value="da">Danish</option>
+                    <option value="cs">Czech</option>
                     <option value="uk">Ukrainian</option>
+                    <option value="tr">Turkish</option>
                     <option value="zh">Chinese</option>
                     <option value="ja">Japanese</option>
+                    <option value="id">Indonesian</option>
+                    <option value="ko">Korean</option>
                     <option value="hi">Hindi</option>
-                    <option value="pl">Polish</option>
-                    <option value="cs">Czech</option>
                 </select>
                 <button id="${btnId}">Translate</button>
                 <div class="translation-result"></div>
@@ -774,7 +884,7 @@ class ClipSmart {
         document.getElementById('autoDeleteSelect').value = this.settings.autoDelete;
         
         // Update translation language selects
-        const langCodes = ['en', 'de', 'fr', 'es', 'ru', 'uk', 'zh', 'ja', 'hi', 'pl', 'cs'];
+        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
         ['transLang1', 'transLang2', 'transLang3'].forEach((id, index) => {
             const select = document.getElementById(id);
             select.innerHTML = '';
@@ -959,26 +1069,40 @@ class ClipSmart {
     }
 
     async togglePremiumMode(enabled) {
-        if (enabled) {
+        if (enabled && !this.isPro) {
+            // User wants to upgrade to Pro
             try {
-                console.log('🔗 Opening payment page for plan: clipsmart-pro');
-                // Open ExtensionPay payment page with specific plan
-                await this.extpay.openPaymentPage('clipsmart-pro');
-                console.log('✅ Payment page opened successfully');
+                if (this.extpay) {
+                    console.log('🚀 Opening ExtensionPay payment page...');
+                    await this.extpay.openPaymentPage();
+                } else {
+                    console.error('❌ ExtensionPay not available');
+                    this.showNotification('Payment system not available. Please try again later.');
+                }
             } catch (error) {
-                console.error('❌ Payment error:', error);
-                console.error('Error details:', {
-                    message: error.message,
-                    stack: error.stack,
-                    extpay: !!this.extpay,
-                    plan: 'clipsmart-pro'
-                });
-                this.showNotification('Payment failed. Please try again.');
+                console.error('❌ Error opening payment page:', error);
+                this.showNotification('Error opening payment page. Please try again.');
             }
-        } else {
-            // Note: ExtensionPay doesn't support downgrading from premium
-            // This would need to be handled through ExtensionPay dashboard
-            this.showNotification('Please contact support to downgrade your subscription.');
+        } else if (!enabled && this.isPro) {
+            // User wants to cancel Pro (this would require ExtensionPay cancel functionality)
+            console.log('⚠️ Pro cancellation not implemented yet');
+            this.showNotification('To cancel your Pro subscription, please contact support.');
+        }
+    }
+
+    // New function to manage subscription for Pro users
+    async manageSubscription() {
+        try {
+            if (this.extpay) {
+                console.log('🔧 Opening ExtensionPay login page for subscription management...');
+                await this.extpay.openLoginPage();
+            } else {
+                console.error('❌ ExtensionPay not available');
+                this.showNotification('Subscription management not available. Please try again later.');
+            }
+        } catch (error) {
+            console.error('❌ Error opening subscription management:', error);
+            this.showNotification('Error opening subscription management. Please try again.');
         }
     }
 

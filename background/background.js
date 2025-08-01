@@ -99,10 +99,13 @@ chrome.runtime.onInstalled.addListener(async (details) => {
         
         this.lastText = text;
         
-        // Get current items
+        // Get current items and check ExtensionPay status
         const data = await chrome.storage.local.get(['clipboardItems', 'isPro']);
         let items = data.clipboardItems || [];
-        const isPro = data.isPro || false;
+        let isPro = data.isPro || false;
+        
+        // Check ExtensionPay data to ensure isPro is correct
+        isPro = await this.checkExtensionPayStatus(isPro);
         
         // Check if item already exists
         const existingIndex = items.findIndex(item => item.text === text);
@@ -118,24 +121,19 @@ chrome.runtime.onInstalled.addListener(async (details) => {
                 text: text,
                 type: this.detectType(text),
                 timestamp: Date.now(),
-                pinned: false,
-                charCount: text.length,
-                translations: {},
-                tags: []
+                tags: new Set()
             };
             
-            items.unshift(newItem);
-            
-            // Limit items for free users
-            if (!isPro && items.length > 20) {
-                // Keep pinned items
-                const pinned = items.filter(item => item.pinned);
-                const unpinned = items.filter(item => !item.pinned).slice(0, 20 - pinned.length);
-                items = [...pinned, ...unpinned];
+            // Check limits for free users
+            if (!isPro && items.length >= 20) {
+                // Remove oldest item
+                items.pop();
             }
+            
+            items.unshift(newItem);
         }
         
-        // Save updated items
+        // Save items
         await chrome.storage.local.set({ clipboardItems: items });
         
         // Update badge
@@ -171,6 +169,33 @@ chrome.runtime.onInstalled.addListener(async (details) => {
         chrome.action.setBadgeText({ text: count > 0 ? count.toString() : '' });
         // Použijeme modrú farbu pozadia s bielym textom
         chrome.action.setBadgeBackgroundColor({ color: '#2196f3' });
+    },
+
+    // New function to check ExtensionPay status
+    async checkExtensionPayStatus(currentIsPro) {
+        try {
+            // Check ExtensionPay storage for user data
+            const syncData = await chrome.storage.sync.get(['extensionpay_user']);
+            const localData = await chrome.storage.local.get(['extensionpay_user']);
+            
+            const extensionpayUser = syncData.extensionpay_user || localData.extensionpay_user;
+            
+            if (extensionpayUser && extensionpayUser.paid && !currentIsPro) {
+                console.log('💰 Found paid user in ExtensionPay data, updating isPro status');
+                await chrome.storage.local.set({ isPro: true });
+                return true;
+            } else if (extensionpayUser && !extensionpayUser.paid && currentIsPro) {
+                console.log('⚠️ User is not paid in ExtensionPay data, updating isPro status');
+                await chrome.storage.local.set({ isPro: false });
+                return false;
+            }
+            
+            return currentIsPro;
+            
+        } catch (error) {
+            console.error('❌ Error checking ExtensionPay status:', error);
+            return currentIsPro;
+        }
     }
 };
 

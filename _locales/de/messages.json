@@ -306,6 +306,22 @@
     "message": "30 Tage",
     "description": "Auto-Löschen 30 Tage"
   },
+  "upgradePro": {
+    "message": "Auf Pro upgraden",
+    "description": "Auf Pro upgraden Button Text"
+  },
+  "manageSubscription": {
+    "message": "Abonnement verwalten",
+    "description": "Abonnement verwalten Button Text für Pro-Benutzer"
+  },
+  "upgradeProTooltip": {
+    "message": "Auf Pro upgraden für unbegrenzte Funktionen",
+    "description": "Tooltip für Upgrade-Button"
+  },
+  "manageSubscriptionTooltip": {
+    "message": "Ihr Pro-Abonnement verwalten",
+    "description": "Tooltip für Abonnement verwalten Button"
+  },
   "unlimitedTranslationsPro": {
     "message": "Unbegrenzte Übersetzungen mit Pro!",
     "description": "Banner oder Button für unbegrenzte Übersetzungen mit Pro-Version"
