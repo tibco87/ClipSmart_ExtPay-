@@ -148,7 +148,7 @@ class ClipSmart {
     updateLimits() {
         const config = window.EXTPAY_CONFIG || {
             limits: {
-                free: { items: 20, translationsPerDay: 10 },
+                free: { items: 20, translationsPerDay: 5 },
                 premium: { items: Infinity, translationsPerDay: Infinity }
             }
         };

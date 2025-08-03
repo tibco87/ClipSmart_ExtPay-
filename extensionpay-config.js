@@ -23,7 +23,7 @@ const EXTPAY_CONFIG = {
     limits: {
         free: {
             items: 20,
-            translationsPerDay: 10,
+            translationsPerDay: 5,
             exportFormats: ['txt'],
             tags: false
         },
