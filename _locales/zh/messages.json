@@ -1,6 +1,6 @@
 {
   "appName": { "message": "ClipSmart", "description": "扩展名称" },
-  "appDescription": { "message": "智能剪贴板管理器", "description": "扩展描述" },
+  "appDescription": { "message": "智能剪贴板管理器，内置15种语言翻译。保存、整理、翻译一键搞定！🚀", "description": "扩展描述" },
   "recent": { "message": "最近", "description": "最近标签" },
   "pinned": { "message": "已固定", "description": "已固定标签" },
   "settings": { "message": "设置", "description": "设置标签" },

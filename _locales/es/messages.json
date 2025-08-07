@@ -1,6 +1,6 @@
 {
   "appName": { "message": "ClipSmart", "description": "El nombre de la extensión" },
-  "appDescription": { "message": "Administrador inteligente del portapapeles para tu navegador", "description": "La descripción de la extensión" },
+  "appDescription": { "message": "Gestor de portapapeles con traductor a 15 idiomas. ¡Guarda, organiza y traduce al instante! 🚀", "description": "La descripción de la extensión" },
   "recent": { "message": "Recientes", "description": "Pestaña recientes" },
   "pinned": { "message": "Fijados", "description": "Pestaña fijados" },
   "settings": { "message": "Configuración", "description": "Pestaña configuración" },

@@ -1,6 +1,6 @@
 {
   "appName": { "message": "ClipSmart", "description": "확장 프로그램 이름" },
-  "appDescription": { "message": "스마트 브라우저 클립보드 관리자", "description": "확장 프로그램 설명" },
+  "appDescription": { "message": "15개 언어 번역기가 내장된 스마트 클립보드 매니저. 저장, 정리, 번역을 한번에! 🚀", "description": "확장 프로그램 설명" },
   "recent": { "message": "최근", "description": "최근 탭" },
   "pinned": { "message": "고정됨", "description": "고정됨 탭" },
   "settings": { "message": "설정", "description": "설정 탭" },
