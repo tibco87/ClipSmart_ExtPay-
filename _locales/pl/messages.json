@@ -61,7 +61,7 @@
   "enablePremium": { "message": "Włącz tryb Premium", "description": "Etykieta włącz premium" },
   "premiumIncludes": { "message": "Funkcje premium obejmują:", "description": "Etykieta funkcje premium" },
   "unlimitedHistory": { "message": "Nieograniczona historia", "description": "Funkcja nieograniczonej historii" },
-  "exportTxtCsv": { "message": "Eksportuj do TXT/CSV", "description": "Funkcja eksportu" },
+  "exportTxtCsvPdf": { "message": "Eksportuj do TXT/CSV", "description": "Funkcja eksportu" },
   "advancedTagging": { "message": "Zaawansowane tagowanie", "description": "Funkcja zaawansowanego tagowania" },
   "unlimitedTranslations": { "message": "Nieograniczone tłumaczenia", "description": "Funkcja nieograniczonych tłumaczeń" },
   "tooltipTranslate": { "message": "Tłumacz", "description": "Tooltip przycisk tłumacz" },

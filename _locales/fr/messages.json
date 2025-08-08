@@ -250,8 +250,8 @@
     "message": "Historique illimité",
     "description": "Fonctionnalité historique illimité"
   },
-  "exportTxtCsv": {
-    "message": "Exporter en TXT/CSV",
+  "exportTxtCsvPdf": {
+    "message": "Export to TXT/CSV/PDF",
     "description": "Fonctionnalité export"
   },
   "advancedTagging": {

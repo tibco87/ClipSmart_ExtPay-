@@ -88,7 +88,7 @@
   "enablePremium": { "message": "प्रीमियम मोड सक्षम करें", "description": "प्रीमियम मोड सक्षम लेबल" },
   "premiumIncludes": { "message": "प्रीमियम सुविधाओं में शामिल हैं:", "description": "प्रीमियम सुविधाएं शामिल लेबल" },
   "unlimitedHistory": { "message": "असीमित इतिहास", "description": "असीमित इतिहास सुविधा" },
-  "exportTxtCsv": { "message": "TXT/CSV में निर्यात करें", "description": "निर्यात सुविधा" },
+  "exportTxtCsvPdf": { "message": "TXT/CSV में निर्यात करें", "description": "निर्यात सुविधा" },
   "advancedTagging": { "message": "उन्नत टैगिंग", "description": "उन्नत टैगिंग सुविधा" },
   "unlimitedTranslations": { "message": "असीमित अनुवाद", "description": "असीमित अनुवाद सुविधा" },
   "tooltipTranslate": { "message": "अनुवाद करें", "description": "अनुवाद बटन टूलटिप" },

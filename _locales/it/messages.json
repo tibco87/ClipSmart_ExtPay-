@@ -266,7 +266,7 @@
     "message": "Cronologia illimitata",
     "description": "Funzionalità cronologia illimitata"
   },
-  "exportTxtCsv": {
+  "exportTxtCsvPdf": {
     "message": "Esporta in TXT/CSV",
     "description": "Funzionalità esporta"
   },

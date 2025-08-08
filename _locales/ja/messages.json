@@ -88,7 +88,7 @@
   "enablePremium": { "message": "プレミアムモードを有効化", "description": "プレミアムモード有効化ラベル" },
   "premiumIncludes": { "message": "プレミアム機能には以下が含まれます：", "description": "プレミアム機能含むラベル" },
   "unlimitedHistory": { "message": "無制限の履歴", "description": "無制限履歴機能" },
-  "exportTxtCsv": { "message": "TXT/CSVにエクスポート", "description": "エクスポート機能" },
+  "exportTxtCsvPdf": { "message": "TXT/CSVにエクスポート", "description": "エクスポート機能" },
   "advancedTagging": { "message": "高度なタグ付け", "description": "高度なタグ付け機能" },
   "unlimitedTranslationsPro": {
     "message": "プロ版で無制限の翻訳！",

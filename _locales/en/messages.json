@@ -294,8 +294,8 @@
     "message": "Unlimited history",
     "description": "Unlimited history feature"
   },
-  "exportTxtCsv": {
-    "message": "Export to TXT/CSV",
+  "exportTxtCsvPdf": {
+    "message": "Export to TXT/CSV/PDF",
     "description": "Export feature"
   },
   "advancedTagging": {

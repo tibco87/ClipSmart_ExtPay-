@@ -61,7 +61,7 @@
   "enablePremium": { "message": "Увімкнути преміум режим", "description": "Мітка увімкнення преміум" },
   "premiumIncludes": { "message": "Преміум функції включають:", "description": "Мітка преміум функцій включають" },
   "unlimitedHistory": { "message": "Необмежена історія", "description": "Функція необмеженої історії" },
-  "exportTxtCsv": { "message": "Експорт в TXT/CSV", "description": "Функція експорту" },
+  "exportTxtCsvPdf": { "message": "Експорт в TXT/CSV", "description": "Функція експорту" },
   "advancedTagging": { "message": "Розширене тегування", "description": "Функція розширеного тегування" },
   "unlimitedTranslations": { "message": "Необмежені переклади", "description": "Функція необмежених перекладів" },
   "tooltipTranslate": { "message": "Перекласти", "description": "Tooltip кнопка перекласти" },

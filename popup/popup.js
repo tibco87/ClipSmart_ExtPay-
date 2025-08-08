@@ -304,7 +304,11 @@ class ClipSmart {
         if (premiumInfo) premiumInfo.textContent = this.getMessage('premiumIncludes');
         const premiumList = document.querySelectorAll('.premium-info ul li');
         if (premiumList[0]) premiumList[0].textContent = this.getMessage('unlimitedHistory');
-        if (premiumList[1]) premiumList[1].textContent = this.getMessage('exportTxtCsv');
+        if (premiumList[1]) premiumList[1].textContent = this.getMessage('exportTxtCsvPdf');
+        
+        // Export feature text (nový element)
+        const exportFeatureText = document.getElementById('exportFeatureText');
+        if (exportFeatureText) exportFeatureText.textContent = this.getMessage('exportTxtCsvPdf');
         if (premiumList[2]) premiumList[2].textContent = this.getMessage('advancedTagging');
         if (premiumList[3]) premiumList[3].textContent = this.getMessage('unlimitedTranslations');
         

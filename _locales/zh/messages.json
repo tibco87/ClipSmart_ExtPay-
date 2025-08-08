@@ -61,7 +61,7 @@
   "enablePremium": { "message": "启用专业版模式", "description": "启用专业版模式标签" },
   "premiumIncludes": { "message": "专业版功能包括：", "description": "专业版功能包括标签" },
   "unlimitedHistory": { "message": "无限历史记录", "description": "无限历史记录功能" },
-  "exportTxtCsv": { "message": "导出为TXT/CSV", "description": "导出功能" },
+  "exportTxtCsvPdf": { "message": "导出为TXT/CSV", "description": "导出功能" },
   "advancedTagging": { "message": "高级标签", "description": "高级标签功能" },
   "unlimitedTranslations": { "message": "无限翻译", "description": "无限翻译功能" },
   "tooltipTranslate": { "message": "翻译", "description": "翻译按钮提示" },

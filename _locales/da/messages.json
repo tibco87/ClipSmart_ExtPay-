@@ -266,7 +266,7 @@
     "message": "Ubegrænset historik",
     "description": "Ubegrænset historik funktion"
   },
-  "exportTxtCsv": {
+  "exportTxtCsvPdf": {
     "message": "Eksporter til TXT/CSV",
     "description": "Eksport funktion"
   },

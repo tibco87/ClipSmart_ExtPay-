@@ -250,8 +250,8 @@
     "message": "Unbegrenzter Verlauf",
     "description": "Unbegrenzter Verlauf Feature"
   },
-  "exportTxtCsv": {
-    "message": "Export nach TXT/CSV",
+  "exportTxtCsvPdf": {
+    "message": "Export nach TXT/CSV/PDF",
     "description": "Export Feature"
   },
   "advancedTagging": {

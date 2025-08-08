@@ -88,7 +88,7 @@
   "enablePremium": { "message": "프리미엄 모드 활성화", "description": "프리미엄 모드 활성화 레이블" },
   "premiumIncludes": { "message": "프리미엄 기능 포함:", "description": "프리미엄 기능 포함 레이블" },
   "unlimitedHistory": { "message": "무제한 기록", "description": "무제한 기록 기능" },
-  "exportTxtCsv": { "message": "TXT/CSV로 내보내기", "description": "내보내기 기능" },
+  "exportTxtCsvPdf": { "message": "TXT/CSV로 내보내기", "description": "내보내기 기능" },
   "advancedTagging": { "message": "고급 태깅", "description": "고급 태깅 기능" },
   "unlimitedTranslationsPro": {
     "message": "프로 버전으로 무제한 번역!",

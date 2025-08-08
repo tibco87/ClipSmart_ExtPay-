@@ -266,7 +266,7 @@
     "message": "Sınırsız geçmiş",
     "description": "Sınırsız geçmiş özelliği"
   },
-  "exportTxtCsv": {
+  "exportTxtCsvPdf": {
     "message": "TXT/CSV'ye Dışa Aktar",
     "description": "Dışa aktarma özelliği"
   },
