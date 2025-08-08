@@ -1,6 +1,6 @@
 {
   "appName": { "message": "ClipSmart", "description": "Název rozšíření" },
-  "appDescription": { "message": "Chytrý správce schránky s překladačem do 15 jazyků. Ukládejte, organizujte a překládejte! 🚀", "description": "Popis rozšíření" },
+  "appDescription": { "message": "Už nikdy neztratíte zkopírovaný text. Správce schránky s překladačem do 15 jazyků, vyhledávání, štítky. 20 zdarma, Pro neomezeně.", "description": "Popis rozšíření" },
   "recent": { "message": "Nedávné", "description": "Záložka nedávné" },
   "pinned": { "message": "Připnuté", "description": "Záložka připnuté" },
   "settings": { "message": "Nastavení", "description": "Záložka nastavení" },

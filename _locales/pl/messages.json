@@ -1,6 +1,6 @@
 {
   "appName": { "message": "ClipSmart", "description": "Nazwa rozszerzenia" },
-  "appDescription": { "message": "Inteligentny menedżer schowka z tłumaczem na 15 języków. Zapisuj, organizuj, tłumacz! 🚀", "description": "Opis rozszerzenia" },
+  "appDescription": { "message": "Nigdy więcej nie zgub skopiowanego tekstu. Menedżer schowka z tłumaczem 15 języków, wyszukiwanie, tagi. 20 za darmo, Pro bez limitu.", "description": "Opis rozszerzenia" },
   "recent": { "message": "Ostatnie", "description": "Zakładka ostatnie" },
   "pinned": { "message": "Przypięte", "description": "Zakładka przypięte" },
   "settings": { "message": "Ustawienia", "description": "Zakładka ustawienia" },
