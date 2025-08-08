@@ -36,7 +36,6 @@ class ClipSmart {
         this.updateItemCount();
         this.updateUIText();
         this.updatePremiumModeCheckbox();
-        this.updateExportButtons(); // Skrytie export tlačidiel pre free užívateľov
     }
 
     async initializeExtPay() {
@@ -74,7 +73,6 @@ class ClipSmart {
             this.updateUIText();
             this.updatePremiumModeCheckbox();
             this.updateUpgradeButton();
-            this.updateExportButtons(); // Aktualizácia export tlačidiel
             
             // Save Pro status to storage
             await chrome.storage.local.set({ isPro: this.isPro });
@@ -90,7 +88,6 @@ class ClipSmart {
                         this.updateUIText();
                         this.updatePremiumModeCheckbox();
                         this.updateUpgradeButton();
-                        this.updateExportButtons(); // Aktualizácia export tlačidiel
                         
                         // Save Pro status to storage
                         await chrome.storage.local.set({ isPro: this.isPro });
@@ -251,9 +248,6 @@ class ClipSmart {
         
         // Update translation quota
         this.updateTranslationQuota();
-        
-        // Update export buttons
-        this.updateExportButtons();
         
         // Theme toggle tooltip
         const themeToggle = document.getElementById('themeToggle');
@@ -734,17 +728,13 @@ class ClipSmart {
             this.showLanguageSelect(element, item);
         });
 
-        // Export button (exportuje len túto položku) - len pre Pro užívateľov
+        // Export button (exportuje len túto položku) - zobrazené pre všetkých, ale kontroluje Pro status
         const exportBtn = element.querySelector('.export-btn');
         if (exportBtn) {
-            if (this.isPro) {
-                exportBtn.style.display = '';
-                exportBtn.addEventListener('click', () => {
-                    this.exportSingleItem(item);
-                });
-            } else {
-                exportBtn.style.display = 'none';
-            }
+            exportBtn.style.display = '';
+            exportBtn.addEventListener('click', () => {
+                this.exportSingleItem(item);
+            });
         }
     }
 
@@ -1297,15 +1287,11 @@ class ClipSmart {
         const div = document.createElement('div');
         div.className = 'translated-text flex items-center gap-2 p-2 bg-gray-100 rounded mt-2';
         
-        // Export tlačidlo sa zobrazuje len pre Pro užívateľov
-        const exportButton = this.isPro ? 
-            `<button class="export-translation-btn" title="${this.getMessage('tooltipExport') || 'Export'}">⬇️</button>` : '';
-        
         div.innerHTML = `
             <strong>${lang.toUpperCase()}:</strong> <span class="translation-content">${translation}</span>
             <button class="copy-translation-btn" title="${this.getMessage('tooltipCopy') || 'Copy'}">📋</button>
             <button class="pin-translation-btn" title="${this.getMessage('tooltipPin') || 'Pin'}">⭐</button>
-            ${exportButton}
+            <button class="export-translation-btn" title="${this.getMessage('tooltipExport') || 'Export'}">⬇️</button>
             <button class="close-translation-btn" title="${this.getMessage('close') || 'Close'}">✖️</button>
         `;
         // Copy handler
@@ -1330,12 +1316,10 @@ class ClipSmart {
             this.showNotification(this.getMessage('pinned') || 'Pinned!');
             this.renderContent();
         });
-        // Export handler (len pre Pro užívateľov)
-        if (this.isPro) {
-            div.querySelector('.export-translation-btn').addEventListener('click', () => {
-                this.exportTranslation(translation, lang);
-            });
-        }
+        // Export handler - zobrazené pre všetkých, ale kontroluje Pro status
+        div.querySelector('.export-translation-btn').addEventListener('click', () => {
+            this.exportTranslation(translation, lang);
+        });
         // Close handler
         div.querySelector('.close-translation-btn').addEventListener('click', () => {
             div.remove();
@@ -1379,17 +1363,6 @@ class ClipSmart {
                 const itemElement = this.createClipboardItemElement(item);
                 pinnedContainer.appendChild(itemElement);
             });
-        }
-    }
-
-    updateExportButtons() {
-        const exportBtn = document.getElementById('exportAllButton');
-        if (exportBtn) {
-            if (this.isPro) {
-                exportBtn.style.display = '';
-            } else {
-                exportBtn.style.display = 'none';
-            }
         }
     }
 }
