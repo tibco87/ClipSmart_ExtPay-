@@ -8,12 +8,12 @@ class ClipSmart {
         this.currentTab = 'recent';
         this.searchQuery = '';
         this.freeItemLimit = 20;
-        this.freeTranslationLimit = 5; // Zmenené z 50 na 5 pre free verziu
+        this.freeTranslationLimit = 5; // 5 prekladov mesačne pre free verziu
         this.translationsUsed = 0;
         this.isPro = false;
         this.defaultTransLangs = ['en', 'de', 'fr'];
         this.tags = new Set();
-        this.translationLimit = 5; // Zmenené z 10 na 5 pre zjednotenie
+        this.translationLimit = 5; // 5 prekladov mesačne pre free verziu
         this.availableLanguages = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
         this.sortOrder = 'newest';
         this.locale = 'en';
@@ -29,7 +29,7 @@ class ClipSmart {
         await this.initializeExtPay();
         await this.loadData();
         await this.loadTags();
-        await this.checkTranslationLimit(); // Načítanie aktuálneho stavu prekladov
+        await this.checkTranslationLimit(); // Načítanie aktuálneho stavu mesačných prekladov
         this.setupEventListeners();
         this.applyTheme();
         this.renderContent();
@@ -149,19 +149,19 @@ class ClipSmart {
     updateLimits() {
         const config = window.EXTPAY_CONFIG || {
             limits: {
-                free: { items: 20, translationsPerDay: 5 },
-                premium: { items: Infinity, translationsPerDay: Infinity }
+                free: { items: 20, translationsPerMonth: 5 }, // 5 prekladov mesačne
+                premium: { items: Infinity, translationsPerMonth: Infinity }
             }
         };
         
         if (this.isPro) {
             this.freeItemLimit = config.limits.premium.items;
-            this.freeTranslationLimit = config.limits.premium.translationsPerDay;
+            this.freeTranslationLimit = config.limits.premium.translationsPerMonth;
             this.translationLimit = Infinity;
         } else {
             this.freeItemLimit = config.limits.free.items;
-            this.freeTranslationLimit = config.limits.free.translationsPerDay;
-            this.translationLimit = config.limits.free.translationsPerDay;
+            this.freeTranslationLimit = config.limits.free.translationsPerMonth;
+            this.translationLimit = config.limits.free.translationsPerMonth;
         }
     }
 
@@ -801,7 +801,7 @@ class ClipSmart {
         // Kontrola limitu prekladov
         const canTranslate = await this.checkTranslationLimit();
         if (!canTranslate) {
-            this.showUpgradeModal('Translation limit reached. Upgrade to Pro for unlimited translations.');
+            this.showUpgradeModal('Monthly translation limit reached. Upgrade to Pro for unlimited translations.');
             return null;
         }
 
@@ -921,7 +921,7 @@ class ClipSmart {
         } else {
             quotaElement.innerHTML = `
                 <span class="quota-text">${this.getMessage('translationsUsed') || 'Translations used'}: 
-                    <strong>${this.translationsUsed}/${this.freeTranslationLimit}</strong> ${this.getMessage('today') || 'today'}
+                    <strong>${this.translationsUsed}/${this.freeTranslationLimit}</strong> ${this.getMessage('thisMonth') || 'this month'}
                 </span>
             `;
         }
@@ -1119,14 +1119,15 @@ class ClipSmart {
     async checkTranslationLimit() {
         if (this.isPro) return true;
         
-        const today = new Date().toDateString();
-        const translationsToday = await chrome.storage.local.get(['translationsToday']);
+        const today = new Date();
+        const currentMonth = today.getFullYear() + '-' + (today.getMonth() + 1);
+        const translationsThisMonth = await chrome.storage.local.get(['translationsThisMonth']);
         
-        if (!translationsToday.translationsToday || translationsToday.translationsToday.date !== today) {
-            // Reset pre nový deň
+        if (!translationsThisMonth.translationsThisMonth || translationsThisMonth.translationsThisMonth.month !== currentMonth) {
+            // Reset pre nový mesiac
             await chrome.storage.local.set({
-                translationsToday: {
-                    date: today,
+                translationsThisMonth: {
+                    month: currentMonth,
                     count: 0
                 }
             });
@@ -1134,29 +1135,30 @@ class ClipSmart {
             return true;
         }
         
-        this.translationsUsed = translationsToday.translationsToday.count;
+        this.translationsUsed = translationsThisMonth.translationsThisMonth.count;
         return this.translationsUsed < this.freeTranslationLimit;
     }
 
     async incrementTranslationCount() {
         if (this.isPro) return;
         
-        const today = new Date().toDateString();
-        const translationsToday = await chrome.storage.local.get(['translationsToday']);
+        const today = new Date();
+        const currentMonth = today.getFullYear() + '-' + (today.getMonth() + 1);
+        const translationsThisMonth = await chrome.storage.local.get(['translationsThisMonth']);
         
-        if (!translationsToday.translationsToday || translationsToday.translationsToday.date !== today) {
+        if (!translationsThisMonth.translationsThisMonth || translationsThisMonth.translationsThisMonth.month !== currentMonth) {
             await chrome.storage.local.set({
-                translationsToday: {
-                    date: today,
+                translationsThisMonth: {
+                    month: currentMonth,
                     count: 1
                 }
             });
             this.translationsUsed = 1;
         } else {
-            const newCount = translationsToday.translationsToday.count + 1;
+            const newCount = translationsThisMonth.translationsThisMonth.count + 1;
             await chrome.storage.local.set({
-                translationsToday: {
-                    date: today,
+                translationsThisMonth: {
+                    month: currentMonth,
                     count: newCount
                 }
             });
