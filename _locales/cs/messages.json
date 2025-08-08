@@ -49,7 +49,34 @@
   "saveToClipSmart": { "message": "Uložit do ClipSmart", "description": "Položka kontextového menu" },
   "openClipSmart": { "message": "Otevřít ClipSmart", "description": "Popis příkazu" },
   "copyLastItem": { "message": "Kopírovat poslední položku schránky", "description": "Popis příkazu" },
-  "items": { "message": "položek", "description": "Štítek počtu položek" },
+  "items": {
+    "message": "položky",
+    "description": "Items label"
+  },
+  "expand": {
+    "message": "📄 Rozbalit",
+    "description": "Expand long text"
+  },
+  "collapse": {
+    "message": "📄 Sbalit",
+    "description": "Collapse long text"
+  },
+  "exportToPDF": {
+    "message": "Exportovat do PDF",
+    "description": "Export to PDF button"
+  },
+  "exportTxt": {
+    "message": "Exportovat jako TXT",
+    "description": "Export as TXT option"
+  },
+  "exportCsv": {
+    "message": "Exportovat jako CSV",
+    "description": "Export as CSV option"
+  },
+  "exportPdf": {
+    "message": "Exportovat jako PDF",
+    "description": "Export as PDF option"
+  },
   "sortBy": { "message": "Řadit podle:", "description": "Štítek řazení" },
   "newest": { "message": "Nejnovější", "description": "Možnost řazení" },
   "oldest": { "message": "Nejstarší", "description": "Možnost řazení" },
@@ -69,8 +96,9 @@
   "tooltipPin": { "message": "Připnout", "description": "Tooltip tlačítko připnout" },
   "tooltipCopy": { "message": "Kopírovat", "description": "Tooltip tlačítko kopírovat" },
   "tooltipDelete": { "message": "Smazat", "description": "Tooltip tlačítko smazat" },
-  "tooltipExport": { "message": "Exportovat", "description": "Tooltip tlačítko exportovat" },
+  "tooltipExport": { "message": "Stáhnout", "description": "Tooltip tlačítko exportovat" },
   "toggleTheme": { "message": "Změnit motiv", "description": "Tooltip tlačítko změnit motiv" },
+  "pdfExportSuccess": { "message": "PDF export úspěšný!", "description": "PDF export success notification" },
   "themeAuto": { "message": "Auto", "description": "Možnost motiv auto" },
   "themeLight": { "message": "Světlý", "description": "Možnost motiv světlý" },
   "themeDark": { "message": "Tmavý", "description": "Možnost motiv tmavý" },

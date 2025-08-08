@@ -69,7 +69,8 @@
   "tooltipCopy": { "message": "复制", "description": "复制按钮提示" },
   "tooltipDelete": { "message": "删除", "description": "删除按钮提示" },
   "tooltipExport": { "message": "导出", "description": "导出按钮提示" },
-  "toggleTheme": { "message": "切换主题", "description": "主题切换按钮提示" },
+  "toggleTheme": { "message": "切换主题", "description": "切换主题提示" },
+  "pdfExportSuccess": { "message": "PDF导出成功！", "description": "PDF导出成功通知" },
   "themeAuto": { "message": "自动", "description": "主题选项自动" },
   "themeLight": { "message": "浅色", "description": "主题选项浅色" },
   "themeDark": { "message": "深色", "description": "主题选项深色" },
@@ -81,7 +82,31 @@
     "description": "专业版无限翻译的横幅或按钮"
   },
   "items": {
-    "message": "项",
-    "description": "Items count label"
+    "message": "项目",
+    "description": "Items label"
+  },
+  "expand": {
+    "message": "📄 展开",
+    "description": "Expand long text"
+  },
+  "collapse": {
+    "message": "📄 收起",
+    "description": "Collapse long text"
+  },
+  "exportToPDF": {
+    "message": "导出为PDF",
+    "description": "Export to PDF button"
+  },
+  "exportTxt": {
+    "message": "导出为TXT",
+    "description": "Export as TXT option"
+  },
+  "exportCsv": {
+    "message": "导出为CSV",
+    "description": "Export as CSV option"
+  },
+  "exportPdf": {
+    "message": "导出为PDF",
+    "description": "Export as PDF option"
   }
 } 

@@ -69,7 +69,8 @@
   "tooltipCopy": { "message": "Kopiuj", "description": "Tooltip przycisk kopiuj" },
   "tooltipDelete": { "message": "Usuń", "description": "Tooltip przycisk usuń" },
   "tooltipExport": { "message": "Eksportuj", "description": "Tooltip przycisk eksportuj" },
-  "toggleTheme": { "message": "Zmień motyw", "description": "Tooltip przycisk zmień motyw" },
+  "toggleTheme": { "message": "Przełącz motyw", "description": "Tooltip przełącz motyw" },
+  "pdfExportSuccess": { "message": "Eksport PDF udany!", "description": "Powiadomienie o udanym eksporcie PDF" },
   "themeAuto": { "message": "Auto", "description": "Opcja motyw auto" },
   "themeLight": { "message": "Jasny", "description": "Opcja motyw jasny" },
   "themeDark": { "message": "Ciemny", "description": "Opcja motyw ciemny" },
@@ -81,7 +82,31 @@
     "description": "Baner lub przycisk dla nieograniczonych tłumaczeń w wersji Pro"
   },
   "items": {
-    "message": "elementów",
-    "description": "Items count label"
+    "message": "elementy",
+    "description": "Items label"
+  },
+  "expand": {
+    "message": "📄 Rozwiń",
+    "description": "Expand long text"
+  },
+  "collapse": {
+    "message": "📄 Zwiń",
+    "description": "Collapse long text"
+  },
+  "exportToPDF": {
+    "message": "Eksportuj do PDF",
+    "description": "Export to PDF button"
+  },
+  "exportTxt": {
+    "message": "Eksportuj jako TXT",
+    "description": "Export as TXT option"
+  },
+  "exportCsv": {
+    "message": "Eksportuj jako CSV",
+    "description": "Export as CSV option"
+  },
+  "exportPdf": {
+    "message": "Eksportuj jako PDF",
+    "description": "Export as PDF option"
   }
 } 

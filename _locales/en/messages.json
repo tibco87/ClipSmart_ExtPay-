@@ -103,6 +103,30 @@
     "message": "items",
     "description": "Items count label"
   },
+  "expand": {
+    "message": "📄 Expand",
+    "description": "Expand long text"
+  },
+  "collapse": {
+    "message": "📄 Collapse",
+    "description": "Collapse long text"
+  },
+  "exportToPDF": {
+    "message": "Export to PDF",
+    "description": "Export to PDF button"
+  },
+  "exportTxt": {
+    "message": "Export as TXT",
+    "description": "Export as TXT option"
+  },
+  "exportCsv": {
+    "message": "Export as CSV",
+    "description": "Export as CSV option"
+  },
+  "exportPdf": {
+    "message": "Export as PDF",
+    "description": "Export as PDF option"
+  },
   "upgradePro": {
     "message": "Upgrade Pro",
     "description": "Upgrade to Pro button text"
@@ -333,5 +357,9 @@
   "close": {
     "message": "Close",
     "description": "Close translation button"
+  },
+  "pdfExportSuccess": {
+    "message": "PDF export successful!",
+    "description": "PDF export success notification"
   }
 }

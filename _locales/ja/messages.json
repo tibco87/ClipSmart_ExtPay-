@@ -49,7 +49,34 @@
   "saveToClipSmart": { "message": "ClipSmartに保存", "description": "コンテキストメニュー項目" },
   "openClipSmart": { "message": "ClipSmartを開く", "description": "コマンド説明" },
   "copyLastItem": { "message": "最後のクリップボード項目をコピー", "description": "コマンド説明" },
-  "items": { "message": "項目", "description": "項目数ラベル" },
+  "items": {
+    "message": "アイテム",
+    "description": "Items label"
+  },
+  "expand": {
+    "message": "📄 展開",
+    "description": "Expand long text"
+  },
+  "collapse": {
+    "message": "📄 折りたたむ",
+    "description": "Collapse long text"
+  },
+  "exportToPDF": {
+    "message": "PDFにエクスポート",
+    "description": "Export to PDF button"
+  },
+  "exportTxt": {
+    "message": "TXTとしてエクスポート",
+    "description": "Export as TXT option"
+  },
+  "exportCsv": {
+    "message": "CSVとしてエクスポート",
+    "description": "Export as CSV option"
+  },
+  "exportPdf": {
+    "message": "PDFとしてエクスポート",
+    "description": "Export as PDF option"
+  },
   "sortBy": { "message": "並び替え：", "description": "並び替えラベル" },
   "newest": { "message": "最新", "description": "並び替えオプション" },
   "oldest": { "message": "最古", "description": "並び替えオプション" },
@@ -72,11 +99,12 @@
   "tooltipCopy": { "message": "コピー", "description": "コピーボタンのツールチップ" },
   "tooltipDelete": { "message": "削除", "description": "削除ボタンのツールチップ" },
   "tooltipExport": { "message": "エクスポート", "description": "エクスポートボタンのツールチップ" },
-  "toggleTheme": { "message": "テーマ切り替え", "description": "テーマ切り替えボタンのツールチップ" },
+  "toggleTheme": { "message": "テーマを切り替え", "description": "テーマ切り替えツールチップ" },
   "themeAuto": { "message": "自動", "description": "テーマオプション自動" },
   "themeLight": { "message": "ライト", "description": "テーマオプションライト" },
   "themeDark": { "message": "ダーク", "description": "テーマオプションダーク" },
   "oneDay": { "message": "1日", "description": "自動削除1日" },
   "sevenDays": { "message": "7日", "description": "自動削除7日" },
-  "thirtyDays": { "message": "30日", "description": "自動削除30日" }
+  "thirtyDays": { "message": "30日", "description": "自動削除30日" },
+  "pdfExportSuccess": { "message": "PDFエクスポート成功！", "description": "PDFエクスポート成功通知" }
 } 

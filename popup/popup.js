@@ -28,7 +28,6 @@ class ClipSmart {
         await this.loadMessages();
         await this.initializeExtPay();
         await this.loadData();
-        await this.loadTags();
         await this.checkTranslationLimit(); // Načítanie aktuálneho stavu mesačných prekladov
         this.setupEventListeners();
         this.applyTheme();
@@ -36,6 +35,14 @@ class ClipSmart {
         this.updateItemCount();
         this.updateUIText();
         this.updatePremiumModeCheckbox();
+        
+        // Kontrola jsPDF načítania
+        if (typeof window.jspdf === 'undefined') {
+            console.warn('jsPDF library not loaded - PDF export will not work');
+            console.log('Available window properties:', Object.keys(window).filter(key => key.includes('pdf') || key.includes('PDF')));
+        } else {
+            console.log('jsPDF library loaded successfully');
+        }
     }
 
     async initializeExtPay() {
@@ -97,7 +104,12 @@ class ClipSmart {
                         }
                     }
                 } catch (error) {
-                    console.error('Payment status check error:', error);
+                    // Don't show error for network issues, just log it silently
+                    if (error.message && error.message.includes('Failed to fetch')) {
+                        console.log('🌐 Network issue during payment status check (normal)');
+                    } else {
+                        console.error('❌ Payment status check error:', error);
+                    }
                 }
             }, 5000); // Check every 5 seconds
             
@@ -253,6 +265,12 @@ class ClipSmart {
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) themeToggle.title = this.getMessage('toggleTheme') || 'Toggle theme';
         
+        // Export PDF button
+        const exportPDFButton = document.getElementById('exportPDFButton');
+        if (exportPDFButton) {
+            exportPDFButton.textContent = this.getMessage('exportToPDF') || 'Export to PDF';
+        }
+        
         // Settings sekcie
         const settingsTitles = document.querySelectorAll('.settings-title');
         if (settingsTitles[0]) settingsTitles[0].textContent = this.getMessage('appearance');
@@ -331,15 +349,36 @@ class ClipSmart {
 
     async loadData() {
         try {
-            const data = await chrome.storage.local.get(['clipboardItems', 'settings', 'isPro']);
+            const data = await chrome.storage.local.get(['clipboardItems', 'settings', 'isPro', 'tags']);
             this.clipboardItems = (data.clipboardItems || []).map(item => {
-                if (item.tags && Array.isArray(item.tags)) item.tags = new Set(item.tags);
+                if (item.tags) {
+                    if (Array.isArray(item.tags)) {
+                        item.tags = new Set(item.tags);
+                    } else if (typeof item.tags === 'string') {
+                        item.tags = new Set([item.tags]);
+                    } else if (!(item.tags instanceof Set)) {
+                        item.tags = new Set();
+                    }
+                }
                 return item;
             });
             
             // Load Pro status from storage (will be updated by ExtensionPay)
             this.isPro = data.isPro || false;
             this.settings = data.settings || this.getDefaultSettings();
+            
+            // Load tags
+            if (data.tags) {
+                if (Array.isArray(data.tags)) {
+                    this.tags = new Set(data.tags);
+                } else if (typeof data.tags === 'string') {
+                    this.tags = new Set([data.tags]);
+                } else {
+                    this.tags = new Set();
+                }
+            } else {
+                this.tags = new Set();
+            }
             
             // Check ExtensionPay data to ensure isPro is correct
             await this.checkExtensionPayStatus();
@@ -379,14 +418,7 @@ class ClipSmart {
         }
     }
 
-    async loadTags() {
-        try {
-            const data = await chrome.storage.local.get('tags');
-            this.tags = new Set(data.tags || []);
-        } catch (error) {
-            console.error('Error loading tags:', error);
-        }
-    }
+
 
     getDefaultSettings() {
         return {
@@ -457,6 +489,11 @@ class ClipSmart {
             if (confirm('Are you sure you want to clear all clipboard items?')) {
                 this.clearAllItems();
             }
+        });
+
+        // Export PDF button
+        document.getElementById('exportPDFButton').addEventListener('click', () => {
+            this.exportToPDF();
         });
 
         // Upgrade button
@@ -657,9 +694,39 @@ class ClipSmart {
         const timeElement = element.querySelector('.item-time');
         timeElement.textContent = this.formatTime(item.timestamp);
 
-        // Set content
+        // Set content with expand/collapse functionality
         const contentElement = element.querySelector('.item-content');
         contentElement.textContent = item.text;
+        
+        // Pridaj funkcionalitu rozbalenia/zbalenia pre dlhý text
+        if (item.text.length > 150) { // Ak je text dlhší ako 150 znakov
+            contentElement.classList.add('expandable');
+            contentElement.style.cursor = 'pointer';
+            
+            // Pridaj indikátor rozbalenia
+            const expandIndicator = document.createElement('div');
+            expandIndicator.className = 'expand-indicator';
+            expandIndicator.innerHTML = this.getMessage('expand') || '📄 Expand';
+            
+            // Vlož indikátor po obsahu
+            contentElement.parentNode.insertBefore(expandIndicator, contentElement.nextSibling);
+            
+            // Event listener pre rozbalenie/zbalenie
+            const toggleExpand = () => {
+                if (contentElement.classList.contains('expanded')) {
+                    // Zbal
+                    contentElement.classList.remove('expanded');
+                    expandIndicator.innerHTML = this.getMessage('expand') || '📄 Expand';
+                } else {
+                    // Rozbal
+                    contentElement.classList.add('expanded');
+                    expandIndicator.innerHTML = this.getMessage('collapse') || '📄 Collapse';
+                }
+            };
+            
+            contentElement.addEventListener('click', toggleExpand);
+            expandIndicator.addEventListener('click', toggleExpand);
+        }
 
         // Set character count
         const charCount = element.querySelector('.item-char-count');
@@ -668,14 +735,25 @@ class ClipSmart {
         // Add tags as heading
         const tagsContainer = element.querySelector('.item-tags');
         tagsContainer.innerHTML = '';
-        if (item.tags && item.tags.size > 0) {
-            item.tags.forEach(tag => {
-                const tagElement = document.createElement('span');
-                tagElement.className = 'item-tag';
-                tagElement.textContent = tag;
-                tagElement.title = tag;
-                tagsContainer.appendChild(tagElement);
-            });
+        if (item.tags) {
+            let tagsArray = [];
+            if (item.tags instanceof Set) {
+                tagsArray = Array.from(item.tags);
+            } else if (Array.isArray(item.tags)) {
+                tagsArray = item.tags;
+            } else if (typeof item.tags === 'string') {
+                tagsArray = [item.tags];
+            }
+            
+            if (tagsArray.length > 0) {
+                tagsArray.forEach(tag => {
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'item-tag';
+                    tagElement.textContent = tag;
+                    tagElement.title = tag;
+                    tagsContainer.appendChild(tagElement);
+                });
+            }
         }
 
         // Add tag button handler
@@ -733,7 +811,7 @@ class ClipSmart {
         if (exportBtn) {
             exportBtn.style.display = '';
             exportBtn.addEventListener('click', () => {
-                this.exportSingleItem(item);
+                this.showExportMenu(element, item);
             });
         }
     }
@@ -869,11 +947,22 @@ class ClipSmart {
             // Pri ukladaní konvertuj Set na pole
             const itemsToSave = this.clipboardItems.map(item => {
                 const newItem = { ...item };
-                if (item.tags instanceof Set) newItem.tags = Array.from(item.tags);
+                if (item.tags) {
+                    if (item.tags instanceof Set) {
+                        newItem.tags = Array.from(item.tags);
+                    } else if (Array.isArray(item.tags)) {
+                        newItem.tags = item.tags;
+                    } else if (typeof item.tags === 'string') {
+                        newItem.tags = [item.tags];
+                    } else {
+                        newItem.tags = [];
+                    }
+                }
                 return newItem;
             });
             await chrome.storage.local.set({ 
                 clipboardItems: itemsToSave,
+                tags: this.tags && this.tags instanceof Set ? Array.from(this.tags) : [],
                 isPro: this.isPro
             });
         } catch (error) {
@@ -1171,12 +1260,21 @@ class ClipSmart {
     async addTag(itemId, tag) {
         const item = this.clipboardItems.find(i => i.id === itemId);
         if (item) {
-            if (!item.tags) item.tags = new Set();
-            if (Array.isArray(item.tags)) item.tags = new Set(item.tags);
+            // Ensure item.tags is a Set
+            if (!item.tags) {
+                item.tags = new Set();
+            } else if (Array.isArray(item.tags)) {
+                item.tags = new Set(item.tags);
+            } else if (typeof item.tags === 'string') {
+                item.tags = new Set([item.tags]);
+            } else if (!(item.tags instanceof Set)) {
+                item.tags = new Set();
+            }
+            
             item.tags.add(tag);
+            if (!this.tags) this.tags = new Set();
             this.tags.add(tag);
             await this.saveData();
-            await this.loadTags();
             this.renderContent();
         }
     }
@@ -1184,18 +1282,35 @@ class ClipSmart {
     async removeTag(itemId, tag) {
         const item = this.clipboardItems.find(i => i.id === itemId);
         if (item && item.tags) {
-            if (Array.isArray(item.tags)) item.tags = new Set(item.tags);
+            // Ensure item.tags is a Set
+            if (Array.isArray(item.tags)) {
+                item.tags = new Set(item.tags);
+            } else if (typeof item.tags === 'string') {
+                item.tags = new Set([item.tags]);
+            } else if (!(item.tags instanceof Set)) {
+                item.tags = new Set();
+            }
+            
             item.tags.delete(tag);
             // Check if tag is used by other items
             const isTagUsed = this.clipboardItems.some(i => {
-                if (Array.isArray(i.tags)) i.tags = new Set(i.tags);
-                return i.tags && i.tags.has(tag);
+                if (i.tags) {
+                    if (Array.isArray(i.tags)) {
+                        i.tags = new Set(i.tags);
+                    } else if (typeof i.tags === 'string') {
+                        i.tags = new Set([i.tags]);
+                    } else if (!(i.tags instanceof Set)) {
+                        i.tags = new Set();
+                    }
+                    return i.tags.has(tag);
+                }
+                return false;
             });
             if (!isTagUsed) {
+                if (!this.tags) this.tags = new Set();
                 this.tags.delete(tag);
             }
             await this.saveData();
-            await this.loadTags();
             this.renderContent();
         }
     }
@@ -1209,7 +1324,9 @@ class ClipSmart {
         const data = this.clipboardItems.map(item => ({
             text: item.text,
             timestamp: this.formatTime(item.timestamp),
-            tags: item.tags ? Array.from(item.tags) : [],
+            tags: item.tags ? (item.tags instanceof Set ? Array.from(item.tags) : 
+                              Array.isArray(item.tags) ? item.tags : 
+                              typeof item.tags === 'string' ? [item.tags] : []) : [],
             translations: item.translations || {}
         }));
 
@@ -1241,7 +1358,7 @@ class ClipSmart {
         const rows = data.map(item => [
             item.text,
             item.timestamp,
-            item.tags.join(', '),
+            Array.isArray(item.tags) ? item.tags.join(', ') : '',
             Object.entries(item.translations)
                 .map(([lang, text]) => `${lang}: ${text}`)
                 .join('; ')
@@ -1258,10 +1375,18 @@ class ClipSmart {
             this.showUpgradeModal('Export is a premium feature');
             return;
         }
+        
+        if (format === 'pdf') {
+            this.exportToPDF([item]);
+            return;
+        }
+        
         const data = {
             text: item.text,
             timestamp: this.formatTime(item.timestamp),
-            tags: item.tags ? Array.from(item.tags) : [],
+            tags: item.tags ? (item.tags instanceof Set ? Array.from(item.tags) : 
+                              Array.isArray(item.tags) ? item.tags : 
+                              typeof item.tags === 'string' ? [item.tags] : []) : [],
             translations: item.translations || {}
         };
         let content, filename, mimeType;
@@ -1364,6 +1489,206 @@ class ClipSmart {
                 pinnedContainer.appendChild(itemElement);
             });
         }
+    }
+
+    exportToPDF(data = null) {
+        if (!this.isPro) {
+            this.showUpgradeModal('Export to PDF is a premium feature. Upgrade to Pro to export your clipboard items as PDF.');
+            return;
+        }
+
+        // Použi poskytnuté dáta alebo všetky položky
+        const itemsToExport = data || this.clipboardItems;
+        
+        if (itemsToExport.length === 0) {
+            this.showNotification('No items to export');
+            return;
+        }
+
+        try {
+            // Kontrola či je jsPDF dostupný
+            if (typeof window.jspdf === 'undefined' || typeof window.jspdf.jsPDF === 'undefined') {
+                this.showNotification('PDF export is not available. Please reload the extension.');
+                console.error('jsPDF library not loaded');
+                return;
+            }
+            
+            // Vytvor nový PDF dokument - jsPDF je dostupný cez window.jspdf.jsPDF
+            let jsPDF;
+            if (window.jspdf && window.jspdf.jsPDF) {
+                jsPDF = window.jspdf.jsPDF;
+                console.log('Using window.jspdf.jsPDF');
+            } else {
+                this.showNotification('PDF export library not available');
+                console.error('jsPDF not found');
+                return;
+            }
+            
+            const doc = new jsPDF();
+            
+            // Nastav fonty a štýly
+            doc.setFont('helvetica');
+            
+            // Nadpis
+            doc.setFontSize(18);
+            doc.setTextColor(40, 40, 40);
+            doc.text('ClipSmart Export', 20, 25);
+            
+            // Dátum exportu
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            const exportDate = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
+            doc.text(`Exportované: ${exportDate}`, 20, 35);
+            
+            // Počet položiek
+            doc.text(`Celkovo položiek: ${itemsToExport.length}`, 20, 42);
+            
+            // Čiara pod hlavičkou
+            doc.setDrawColor(200, 200, 200);
+            doc.line(20, 50, 190, 50);
+            
+            // Export položiek
+            let y = 65;
+            let pageNumber = 1;
+            
+            itemsToExport.forEach((item, index) => {
+                // Kontrola či sa zmestí na stránku
+                if (y > 270) {
+                    doc.addPage();
+                    pageNumber++;
+                    y = 20;
+                    
+                    // Hlavička na novej stránke
+                    doc.setFontSize(12);
+                    doc.setTextColor(100, 100, 100);
+                    doc.text(`ClipSmart Export - Stránka ${pageNumber}`, 20, y);
+                    y += 15;
+                }
+                
+                // Číslo položky
+                doc.setFontSize(10);
+                doc.setTextColor(60, 60, 60);
+                doc.text(`${index + 1}.`, 20, y);
+                
+                // Typ položky (ikona)
+                const typeIcon = this.getTypeIcon(item.type);
+                doc.text(typeIcon, 30, y);
+                
+                // Čas vytvorenia
+                const timeText = this.formatTime(item.timestamp);
+                doc.setTextColor(120, 120, 120);
+                doc.setFontSize(8);
+                doc.text(timeText, 45, y);
+                
+                // Tagy
+                if (item.tags) {
+                    let tagsArray = [];
+                    if (item.tags instanceof Set) {
+                        tagsArray = Array.from(item.tags);
+                    } else if (Array.isArray(item.tags)) {
+                        tagsArray = item.tags;
+                    } else if (typeof item.tags === 'string') {
+                        tagsArray = [item.tags];
+                    }
+                    
+                    if (tagsArray.length > 0) {
+                        const tagsText = tagsArray.join(', ');
+                        doc.text(`[${tagsText}]`, 120, y);
+                    }
+                }
+                
+                y += 8;
+                
+                // Text položky
+                doc.setFontSize(10);
+                doc.setTextColor(20, 20, 20);
+                
+                // Rozdel text na riadky ak je dlhý
+                const maxWidth = 160;
+                const textLines = doc.splitTextToSize(item.text, maxWidth);
+                
+                textLines.forEach(line => {
+                    if (y > 270) {
+                        doc.addPage();
+                        pageNumber++;
+                        y = 20;
+                    }
+                    doc.text(line, 20, y);
+                    y += 5;
+                });
+                
+                // Počet znakov
+                doc.setFontSize(8);
+                doc.setTextColor(120, 120, 120);
+                doc.text(`${item.charCount} znakov`, 20, y);
+                
+                y += 12;
+                
+                // Čiara medzi položkami (ak nie je posledná)
+                if (index < itemsToExport.length - 1) {
+                    doc.setDrawColor(240, 240, 240);
+                    doc.line(20, y - 2, 190, y - 2);
+                }
+            });
+            
+            // Pätička
+            const totalPages = doc.getNumberOfPages();
+            for (let i = 1; i <= totalPages; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.setTextColor(150, 150, 150);
+                doc.text(`ClipSmart v1.0.5 - Stránka ${i} z ${totalPages}`, 20, 290);
+            }
+            
+            // Ulož PDF
+            const fileName = `clipsmart-export-${new Date().toISOString().slice(0, 10)}.pdf`;
+            doc.save(fileName);
+            
+            this.showNotification(this.getMessage('pdfExportSuccess') || 'PDF export successful!');
+            
+        } catch (error) {
+            console.error('PDF export error:', error);
+            this.showNotification('Chyba pri exporte PDF');
+        }
+    }
+
+    showExportMenu(element, item) {
+        const menu = document.createElement('div');
+        menu.className = 'export-menu';
+        menu.innerHTML = `
+            <button class="export-option" data-format="txt">${this.getMessage('exportTxt') || 'Export as TXT'}</button>
+            <button class="export-option" data-format="csv">${this.getMessage('exportCsv') || 'Export as CSV'}</button>
+            <button class="export-option" data-format="pdf">${this.getMessage('exportPdf') || 'Export as PDF'}</button>
+        `;
+
+        // Pozícia menu
+        const rect = element.getBoundingClientRect();
+        menu.style.top = `${rect.bottom + 5}px`;
+        menu.style.left = `${rect.left + rect.width / 2}px`;
+        menu.style.transform = 'translateX(-50%)';
+
+        document.body.appendChild(menu);
+
+        menu.addEventListener('click', (e) => {
+            if (e.target.classList.contains('export-option')) {
+                const format = e.target.dataset.format;
+                this.exportSingleItem(item, format);
+                menu.remove();
+            }
+        });
+
+        // Zatvoriť pri kliknutí mimo menu
+        const closeMenu = (event) => {
+            if (!menu.contains(event.target) && !element.contains(event.target)) {
+                menu.remove();
+                document.removeEventListener('click', closeMenu);
+            }
+        };
+        
+        // Pridať event listener s oneskorením aby sa nevyvolal okamžite
+        setTimeout(() => {
+            document.addEventListener('click', closeMenu);
+        }, 100);
     }
 }
 

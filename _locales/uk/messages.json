@@ -69,7 +69,8 @@
   "tooltipCopy": { "message": "Копіювати", "description": "Tooltip кнопка копіювати" },
   "tooltipDelete": { "message": "Видалити", "description": "Tooltip кнопка видалити" },
   "tooltipExport": { "message": "Експортувати", "description": "Tooltip кнопка експортувати" },
-  "toggleTheme": { "message": "Змінити тему", "description": "Tooltip кнопка змінити тему" },
+  "toggleTheme": { "message": "Перемкнути тему", "description": "Tooltip перемкнути тему" },
+  "pdfExportSuccess": { "message": "PDF експорт успішний!", "description": "Сповіщення про успішний PDF експорт" },
   "themeAuto": { "message": "Авто", "description": "Опція теми авто" },
   "themeLight": { "message": "Світла", "description": "Опція теми світла" },
   "themeDark": { "message": "Темна", "description": "Опція теми темна" },
@@ -81,7 +82,31 @@
     "description": "Банер або кнопка для необмежених перекладів у версії Pro"
   },
   "items": {
-    "message": "елементів",
-    "description": "Items count label"
+    "message": "елементи",
+    "description": "Items label"
+  },
+  "expand": {
+    "message": "📄 Розгорнути",
+    "description": "Expand long text"
+  },
+  "collapse": {
+    "message": "📄 Згорнути",
+    "description": "Collapse long text"
+  },
+  "exportToPDF": {
+    "message": "Експорт в PDF",
+    "description": "Export to PDF button"
+  },
+  "exportTxt": {
+    "message": "Експорт як TXT",
+    "description": "Export as TXT option"
+  },
+  "exportCsv": {
+    "message": "Експорт як CSV",
+    "description": "Export as CSV option"
+  },
+  "exportPdf": {
+    "message": "Експорт як PDF",
+    "description": "Export as PDF option"
   }
 } 

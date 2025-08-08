@@ -49,7 +49,34 @@
   "saveToClipSmart": { "message": "ClipSmart에 저장", "description": "컨텍스트 메뉴 항목" },
   "openClipSmart": { "message": "ClipSmart 열기", "description": "명령 설명" },
   "copyLastItem": { "message": "마지막 클립보드 항목 복사", "description": "명령 설명" },
-  "items": { "message": "개 항목", "description": "항목 수 레이블" },
+  "items": {
+    "message": "항목",
+    "description": "Items label"
+  },
+  "expand": {
+    "message": "📄 펼치기",
+    "description": "Expand long text"
+  },
+  "collapse": {
+    "message": "📄 접기",
+    "description": "Collapse long text"
+  },
+  "exportToPDF": {
+    "message": "PDF로 내보내기",
+    "description": "Export to PDF button"
+  },
+  "exportTxt": {
+    "message": "TXT로 내보내기",
+    "description": "Export as TXT option"
+  },
+  "exportCsv": {
+    "message": "CSV로 내보내기",
+    "description": "Export as CSV option"
+  },
+  "exportPdf": {
+    "message": "PDF로 내보내기",
+    "description": "Export as PDF option"
+  },
   "sortBy": { "message": "정렬 기준:", "description": "정렬 레이블" },
   "newest": { "message": "최신순", "description": "정렬 옵션" },
   "oldest": { "message": "오래된순", "description": "정렬 옵션" },
@@ -72,7 +99,8 @@
   "tooltipCopy": { "message": "복사", "description": "복사 버튼 툴팁" },
   "tooltipDelete": { "message": "삭제", "description": "삭제 버튼 툴팁" },
   "tooltipExport": { "message": "내보내기", "description": "내보내기 버튼 툴팁" },
-  "toggleTheme": { "message": "테마 전환", "description": "테마 전환 버튼 툴팁" },
+  "toggleTheme": { "message": "테마 전환", "description": "테마 전환 툴팁" },
+  "pdfExportSuccess": { "message": "PDF 내보내기 성공!", "description": "PDF 내보내기 성공 알림" },
   "themeAuto": { "message": "자동", "description": "테마 옵션 자동" },
   "themeLight": { "message": "라이트", "description": "테마 옵션 라이트" },
   "themeDark": { "message": "다크", "description": "테마 옵션 다크" },

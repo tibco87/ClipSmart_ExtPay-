@@ -49,7 +49,10 @@
   "saveToClipSmart": { "message": "Guardar en ClipSmart", "description": "Elemento menú contextual" },
   "openClipSmart": { "message": "Abrir ClipSmart", "description": "Descripción comando" },
   "copyLastItem": { "message": "Copiar el último elemento del portapapeles", "description": "Descripción comando" },
-  "items": { "message": "elementos", "description": "Etiqueta número de elementos" },
+  "items": {
+    "message": "elementos",
+    "description": "Items label"
+  },
   "sortBy": { "message": "Ordenar por:", "description": "Etiqueta ordenar" },
   "newest": { "message": "Más recientes", "description": "Opción ordenar" },
   "oldest": { "message": "Más antiguos", "description": "Opción ordenar" },
@@ -69,7 +72,8 @@
   "tooltipCopy": { "message": "Copiar", "description": "Tooltip botón copiar" },
   "tooltipDelete": { "message": "Eliminar", "description": "Tooltip botón eliminar" },
   "tooltipExport": { "message": "Exportar", "description": "Tooltip botón exportar" },
-  "toggleTheme": { "message": "Cambiar tema", "description": "Tooltip botón cambiar tema" },
+  "toggleTheme": { "message": "Cambiar tema", "description": "Tooltip cambiar tema" },
+  "pdfExportSuccess": { "message": "¡Exportación PDF exitosa!", "description": "Notificación de éxito de exportación PDF" },
   "themeAuto": { "message": "Auto", "description": "Opción tema auto" },
   "themeLight": { "message": "Claro", "description": "Opción tema claro" },
   "themeDark": { "message": "Oscuro", "description": "Opción tema oscuro" },
@@ -80,8 +84,28 @@
     "message": "¡Traducciones ilimitadas con Pro!",
     "description": "Banner o botón para traducciones ilimitadas con la versión Pro"
   },
-  "items": {
-    "message": "elementos",
-    "description": "Items count label"
+  "expand": {
+    "message": "📄 Expandir",
+    "description": "Expand long text"
+  },
+  "collapse": {
+    "message": "📄 Contraer",
+    "description": "Collapse long text"
+  },
+  "exportToPDF": {
+    "message": "Exportar a PDF",
+    "description": "Export to PDF button"
+  },
+  "exportTxt": {
+    "message": "Exportar como TXT",
+    "description": "Export as TXT option"
+  },
+  "exportCsv": {
+    "message": "Exportar como CSV",
+    "description": "Export as CSV option"
+  },
+  "exportPdf": {
+    "message": "Exportar como PDF",
+    "description": "Export as PDF option"
   }
 } 

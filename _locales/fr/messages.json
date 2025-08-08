@@ -333,5 +333,33 @@
   "items": {
     "message": "éléments",
     "description": "Items count label"
+  },
+  "expand": {
+    "message": "📄 Développer",
+    "description": "Expand long text"
+  },
+  "collapse": {
+    "message": "📄 Réduire",
+    "description": "Collapse long text"
+  },
+  "exportToPDF": {
+    "message": "Exporter en PDF",
+    "description": "Export to PDF button"
+  },
+  "exportTxt": {
+    "message": "Exporter en TXT",
+    "description": "Export as TXT option"
+  },
+  "exportCsv": {
+    "message": "Exporter en CSV",
+    "description": "Export as CSV option"
+  },
+  "exportPdf": {
+    "message": "Exporter en PDF",
+    "description": "Export as PDF option"
+  },
+  "pdfExportSuccess": {
+    "message": "Export PDF réussi !",
+    "description": "Notification de succès d'export PDF"
   }
 } 
