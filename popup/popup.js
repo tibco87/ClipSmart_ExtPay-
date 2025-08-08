@@ -8,12 +8,12 @@ class ClipSmart {
         this.currentTab = 'recent';
         this.searchQuery = '';
         this.freeItemLimit = 20;
-        this.freeTranslationLimit = 50;
+        this.freeTranslationLimit = 5; // Zmenené z 50 na 5 pre free verziu
         this.translationsUsed = 0;
         this.isPro = false;
         this.defaultTransLangs = ['en', 'de', 'fr'];
         this.tags = new Set();
-        this.translationLimit = 10; // Translation limit for free version
+        this.translationLimit = 5; // Zmenené z 10 na 5 pre zjednotenie
         this.availableLanguages = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
         this.sortOrder = 'newest';
         this.locale = 'en';
@@ -29,6 +29,7 @@ class ClipSmart {
         await this.initializeExtPay();
         await this.loadData();
         await this.loadTags();
+        await this.checkTranslationLimit(); // Načítanie aktuálneho stavu prekladov
         this.setupEventListeners();
         this.applyTheme();
         this.renderContent();
@@ -156,9 +157,11 @@ class ClipSmart {
         if (this.isPro) {
             this.freeItemLimit = config.limits.premium.items;
             this.freeTranslationLimit = config.limits.premium.translationsPerDay;
+            this.translationLimit = Infinity;
         } else {
             this.freeItemLimit = config.limits.free.items;
             this.freeTranslationLimit = config.limits.free.translationsPerDay;
+            this.translationLimit = config.limits.free.translationsPerDay;
         }
     }
 
@@ -242,6 +245,9 @@ class ClipSmart {
         // Update upgrade button based on Pro status
         this.updateUpgradeButton();
         
+        // Update translation quota
+        this.updateTranslationQuota();
+        
         // Theme toggle tooltip
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) themeToggle.title = this.getMessage('toggleTheme') || 'Toggle theme';
@@ -324,7 +330,7 @@ class ClipSmart {
 
     async loadData() {
         try {
-            const data = await chrome.storage.local.get(['clipboardItems', 'settings', 'isPro', 'translationsUsed']);
+            const data = await chrome.storage.local.get(['clipboardItems', 'settings', 'isPro']);
             this.clipboardItems = (data.clipboardItems || []).map(item => {
                 if (item.tags && Array.isArray(item.tags)) item.tags = new Set(item.tags);
                 return item;
@@ -333,7 +339,6 @@ class ClipSmart {
             // Load Pro status from storage (will be updated by ExtensionPay)
             this.isPro = data.isPro || false;
             this.settings = data.settings || this.getDefaultSettings();
-            this.translationsUsed = data.translationsUsed || 0;
             
             // Check ExtensionPay data to ensure isPro is correct
             await this.checkExtensionPayStatus();
@@ -793,8 +798,10 @@ class ClipSmart {
     }
 
     async translateText(text, targetLang) {
-        if (!this.isPro && this.translationsUsed >= this.translationLimit) {
-            this.showUpgradeModal('Translation limit reached');
+        // Kontrola limitu prekladov
+        const canTranslate = await this.checkTranslationLimit();
+        if (!canTranslate) {
+            this.showUpgradeModal('Translation limit reached. Upgrade to Pro for unlimited translations.');
             return null;
         }
 
@@ -808,11 +815,11 @@ class ClipSmart {
                     }
                 );
             });
-            if (!this.isPro) {
-                this.translationsUsed++;
-                await chrome.storage.local.set({ translationsUsed: this.translationsUsed });
-                this.updateTranslationQuota();
-            }
+            
+            // Zvýšenie počtu použitých prekladov
+            await this.incrementTranslationCount();
+            this.updateTranslationQuota();
+            
             return translation;
         } catch (error) {
             console.error('Translation error:', error);
@@ -865,8 +872,7 @@ class ClipSmart {
             });
             await chrome.storage.local.set({ 
                 clipboardItems: itemsToSave,
-                isPro: this.isPro,
-                translationsUsed: this.translationsUsed
+                isPro: this.isPro
             });
         } catch (error) {
             console.error('Error saving data:', error);
@@ -911,11 +917,11 @@ class ClipSmart {
     updateTranslationQuota() {
         const quotaElement = document.getElementById('translationQuota');
         if (this.isPro) {
-            quotaElement.innerHTML = `<span class="quota-text">${this.getMessage('unlimitedTranslationsPro')}</span>`;
+            quotaElement.innerHTML = `<span class="quota-text">${this.getMessage('unlimitedTranslationsPro') || 'Unlimited translations'}</span>`;
         } else {
             quotaElement.innerHTML = `
                 <span class="quota-text">${this.getMessage('translationsUsed') || 'Translations used'}: 
-                    <strong>${this.translationsUsed}/${this.freeTranslationLimit}</strong> ${this.getMessage('thisMonth') || 'this month'}
+                    <strong>${this.translationsUsed}/${this.freeTranslationLimit}</strong> ${this.getMessage('today') || 'today'}
                 </span>
             `;
         }
@@ -1117,16 +1123,19 @@ class ClipSmart {
         const translationsToday = await chrome.storage.local.get(['translationsToday']);
         
         if (!translationsToday.translationsToday || translationsToday.translationsToday.date !== today) {
+            // Reset pre nový deň
             await chrome.storage.local.set({
                 translationsToday: {
                     date: today,
                     count: 0
                 }
             });
+            this.translationsUsed = 0;
             return true;
         }
         
-        return translationsToday.translationsToday.count < this.freeTranslationLimit;
+        this.translationsUsed = translationsToday.translationsToday.count;
+        return this.translationsUsed < this.freeTranslationLimit;
     }
 
     async incrementTranslationCount() {
@@ -1142,13 +1151,16 @@ class ClipSmart {
                     count: 1
                 }
             });
+            this.translationsUsed = 1;
         } else {
+            const newCount = translationsToday.translationsToday.count + 1;
             await chrome.storage.local.set({
                 translationsToday: {
                     date: today,
-                    count: translationsToday.translationsToday.count + 1
+                    count: newCount
                 }
             });
+            this.translationsUsed = newCount;
         }
     }
 
