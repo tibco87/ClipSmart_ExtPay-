@@ -88,7 +88,7 @@
   "enablePremium": { "message": "프리미엄 모드 활성화", "description": "프리미엄 모드 활성화 레이블" },
   "premiumIncludes": { "message": "프리미엄 기능 포함:", "description": "프리미엄 기능 포함 레이블" },
   "unlimitedHistory": { "message": "무제한 기록", "description": "무제한 기록 기능" },
-  "exportTxtCsvPdf": { "message": "TXT/CSV로 내보내기", "description": "내보내기 기능" },
+  "exportTxtCsvPdf": { "message": "TXT/CSV/PDF로 내보내기", "description": "내보내기 기능" },
   "advancedTagging": { "message": "고급 태깅", "description": "고급 태깅 기능" },
   "unlimitedTranslationsPro": {
     "message": "프로 버전으로 무제한 번역!",
@@ -101,6 +101,9 @@
   "tooltipExport": { "message": "내보내기", "description": "내보내기 버튼 툴팁" },
   "toggleTheme": { "message": "테마 전환", "description": "테마 전환 툴팁" },
   "pdfExportSuccess": { "message": "PDF 내보내기 성공!", "description": "PDF 내보내기 성공 알림" },
+  "selectTranslationLanguage": { "message": "번역 언어 선택:", "description": "번역 언어 선택 라벨" },
+  "translating": { "message": "번역 중...", "description": "번역 로딩 텍스트" },
+  "translationFailed": { "message": "번역에 실패했습니다.", "description": "번역 실패 메시지" },
   "themeAuto": { "message": "자동", "description": "테마 옵션 자동" },
   "themeLight": { "message": "라이트", "description": "테마 옵션 라이트" },
   "themeDark": { "message": "다크", "description": "테마 옵션 다크" },

@@ -52,8 +52,8 @@
     "description": "Sprache Einstellung"
   },
   "interfaceLanguage": {
-    "message": "Oberflächensprache",
-    "description": "Oberflächensprache Einstellung"
+    "message": "UI-Sprache",
+    "description": "UI-Sprache Einstellung"
   },
   "storage": {
     "message": "Speicher",
@@ -183,12 +183,12 @@
     "description": "Löschen Button"
   },
   "translating": {
-    "message": "Übersetze...",
-    "description": "Übersetzen lädt"
+    "message": "Übersetzen...",
+    "description": "Übersetzen Lade-Text"
   },
   "translationFailed": {
-    "message": "Übersetzung fehlgeschlagen. Bitte versuchen Sie es erneut.",
-    "description": "Übersetzungsfehler"
+    "message": "Übersetzung fehlgeschlagen.",
+    "description": "Übersetzung fehlgeschlagen Nachricht"
   },
   "saveToClipSmart": {
     "message": "In ClipSmart speichern",
@@ -357,5 +357,9 @@
   "pdfExportSuccess": {
     "message": "PDF-Export erfolgreich!",
     "description": "PDF-Export Erfolgsbenachrichtigung"
+  },
+  "selectTranslationLanguage": {
+    "message": "Übersetzungssprache auswählen:",
+    "description": "Übersetzungssprache auswählen Label"
   }
 } 

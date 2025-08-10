@@ -1,7 +1,34 @@
 // ClipSmart Background Service Worker
 
-// Load ExtensionPay configuration and script
-importScripts('../extensionpay-config.js');
+// ExtensionPay Configuration
+const EXTENSION_ID = 'nbpndheaoecmgnlmfpleeahoicpcbppj';
+const EXTPAY_CONFIG = {
+    extensionId: EXTENSION_ID,
+    plans: {
+        clipsmart_pro: {
+            nickname: 'clipsmart-pro',
+            price: 3.99,
+            currency: 'EUR',
+            interval: 'month'
+        }
+    },
+    limits: {
+        free: {
+            items: 20,
+            translationsPerDay: 5,
+            exportFormats: ['txt'],
+            tags: false
+        },
+        premium: {
+            items: Infinity,
+            translationsPerDay: Infinity,
+            exportFormats: ['txt', 'csv', 'json'],
+            tags: true
+        }
+    }
+};
+
+// Load ExtensionPay script
 importScripts('../js/extpay.js');
 
 // ExtensionPay is loaded as a global function

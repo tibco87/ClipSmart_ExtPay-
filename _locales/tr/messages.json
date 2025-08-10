@@ -4,7 +4,7 @@
     "description": "Uzantının adı"
   },
   "appDescription": {
-    "message": "Kopyalanan metni bir daha asla kaybetmeyin. 15 dilli çevirici, arama, etiketler ile pano yöneticisi. 20 ücretsiz, Pro sınırsız.",
+    "message": "Kopyalanan metni bir daha asla kaybetmeyin. 18 dilli çevirici, arama, etiketler ile pano yöneticisi. 20 ücretsiz, Pro sınırsız.",
     "description": "Uzantının açıklaması"
   },
   "recent": {
@@ -267,7 +267,7 @@
     "description": "Sınırsız geçmiş özelliği"
   },
   "exportTxtCsvPdf": {
-    "message": "TXT/CSV'ye Dışa Aktar",
+    "message": "TXT/CSV/PDF'ye Dışa Aktar",
     "description": "Dışa aktarma özelliği"
   },
   "advancedTagging": {
@@ -361,5 +361,17 @@
   "pdfExportSuccess": {
     "message": "PDF dışa aktarma başarılı!",
     "description": "PDF dışa aktarma başarı bildirimi"
+  },
+  "selectTranslationLanguage": {
+    "message": "Çeviri dilini seçin:",
+    "description": "Çeviri dili seç etiketi"
+  },
+  "translating": {
+    "message": "Çeviriliyor...",
+    "description": "Çeviri yükleme metni"
+  },
+  "translationFailed": {
+    "message": "Çeviri başarısız oldu.",
+    "description": "Çeviri hata mesajı"
   }
 } 

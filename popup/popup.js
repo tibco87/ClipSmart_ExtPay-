@@ -14,7 +14,7 @@ class ClipSmart {
         this.defaultTransLangs = ['en', 'de', 'fr'];
         this.tags = new Set();
         this.translationLimit = 5; // 5 prekladov mesačne pre free verziu
-        this.availableLanguages = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
+        this.availableLanguages = ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
         this.sortOrder = 'newest';
         this.locale = 'en';
         this.messages = {};
@@ -24,10 +24,10 @@ class ClipSmart {
     }
 
     async init() {
+        await this.loadData();
         await this.detectAndSetLocale();
         await this.loadMessages();
         await this.initializeExtPay();
-        await this.loadData();
         await this.checkTranslationLimit(); // Načítanie aktuálneho stavu mesačných prekladov
         this.setupEventListeners();
         this.applyTheme();
@@ -429,7 +429,7 @@ class ClipSmart {
             theme: 'auto',
             language: 'en',
             autoDelete: 'never',
-            translationLangs: ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi']
+            translationLangs: ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi']
         };
     }
 
@@ -835,16 +835,19 @@ class ClipSmart {
         panel.style.display = 'block';
         panel.innerHTML = `
             <div class="translation-list">
-                <label for="${selectId}">Select translation language:</label>
+                <label for="${selectId}">${this.getMessage('selectTranslationLanguage') || 'Select translation language:'}</label>
                 <select id="${selectId}">
                     <option value="en">English</option>
                     <option value="de">German</option>
                     <option value="fr">French</option>
                     <option value="es">Spanish</option>
                     <option value="it">Italian</option>
+                    <option value="pt">Portuguese</option>
                     <option value="pl">Polish</option>
                     <option value="da">Danish</option>
                     <option value="cs">Czech</option>
+                    <option value="sk">Slovak</option>
+                    <option value="hu">Hungarian</option>
                     <option value="uk">Ukrainian</option>
                     <option value="tr">Turkish</option>
                     <option value="zh">Chinese</option>
@@ -853,7 +856,7 @@ class ClipSmart {
                     <option value="ko">Korean</option>
                     <option value="hi">Hindi</option>
                 </select>
-                <button id="${btnId}">Translate</button>
+                <button id="${btnId}">${this.getMessage('translate') || 'Translate'}</button>
                 <div class="translation-result"></div>
             </div>
         `;
@@ -864,7 +867,7 @@ class ClipSmart {
         const resultDiv = panel.querySelector('.translation-result');
 
         goBtn.addEventListener('click', async () => {
-            resultDiv.innerHTML = '<div class="loading">Translating...</div>';
+            resultDiv.innerHTML = `<div class="loading">${this.getMessage('translating') || 'Translating...'}</div>`;
             const lang = select.value;
             try {
                 const translation = await this.translateText(item.text, lang);
@@ -873,10 +876,10 @@ class ClipSmart {
                     const transItem = this.createTranslationElement(lang, translation);
                     resultDiv.appendChild(transItem);
                 } else {
-                    resultDiv.innerHTML = '<div class="error">Translation failed.</div>';
+                    resultDiv.innerHTML = `<div class="error">${this.getMessage('translationFailed') || 'Translation failed.'}</div>`;
                 }
             } catch (error) {
-                resultDiv.innerHTML = '<div class="error">Translation failed.</div>';
+                resultDiv.innerHTML = `<div class="error">${this.getMessage('translationFailed') || 'Translation failed.'}</div>`;
             }
         });
     }
@@ -989,7 +992,7 @@ class ClipSmart {
         document.getElementById('autoDeleteSelect').value = this.settings.autoDelete;
         
         // Update translation language selects
-        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
+        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
         ['transLang1', 'transLang2', 'transLang3'].forEach((id, index) => {
             const select = document.getElementById(id);
             select.innerHTML = '';
@@ -1657,6 +1660,15 @@ class ClipSmart {
     }
 
     showExportMenu(element, item) {
+        // Zatvor všetky existujúce export menu
+        const existingMenus = document.querySelectorAll('.export-menu');
+        existingMenus.forEach(menu => menu.remove());
+        
+        // Ak už je menu otvorené pre túto položku, zatvor ho
+        if (element.querySelector('.export-menu')) {
+            return;
+        }
+        
         const menu = document.createElement('div');
         menu.className = 'export-menu';
         menu.innerHTML = `
@@ -1665,34 +1677,91 @@ class ClipSmart {
             <button class="export-option" data-format="pdf">${this.getMessage('exportPdf') || 'Export as PDF'}</button>
         `;
 
-        // Pozícia menu
-        const rect = element.getBoundingClientRect();
-        menu.style.top = `${rect.bottom + 5}px`;
-        menu.style.left = `${rect.left + rect.width / 2}px`;
-        menu.style.transform = 'translateX(-50%)';
+        // Dropdown riešenie - menu sa zobrazí ako dropdown pod export button
+        menu.style.position = 'relative';
+        menu.style.top = 'auto';
+        menu.style.left = 'auto';
+        menu.style.transform = 'none';
+        menu.style.zIndex = '1000';
+        menu.style.marginTop = '5px';
 
-        document.body.appendChild(menu);
+        // Pridaj menu do položky
+        element.appendChild(menu);
 
+        // Kontrola, či sa menu zmestí do viewportu a ak nie, scrolluj popup
+        setTimeout(() => {
+            const menuRect = menu.getBoundingClientRect();
+            const popupRect = document.body.getBoundingClientRect();
+            const popupScrollContainer = document.querySelector('.popup-content') || document.body;
+
+            // Ak sa menu nezmestí dole, scrolluj popup tak, aby bolo viditeľné
+            if (menuRect.bottom > popupRect.height) {
+                const scrollAmount = menuRect.bottom - popupRect.height + 20; // +20px pre margin
+                popupScrollContainer.scrollTop += scrollAmount;
+            }
+        }, 10); // Malé oneskorenie pre správne výpočty
+
+        // Funkcia na zatvorenie menu a cleanup
+        const closeMenuAndCleanup = () => {
+            if (menu && menu.parentNode) {
+                menu.remove();
+            }
+            // Cleanup všetkých event listenerov
+            document.removeEventListener('click', closeMenuOnClickOutside);
+            document.removeEventListener('keydown', closeMenuOnEscape);
+            window.removeEventListener('blur', closeMenuOnBlur);
+        };
+
+        // Zatvoriť menu pri kliknutí mimo
+        const closeMenuOnClickOutside = (event) => {
+            // Ak klikol na export tlačidlo tej istej položky, nezatváraj menu (toggle)
+            if (event.target.closest('.export-btn') && event.target.closest('.clipboard-item') === element) {
+                return;
+            }
+            
+            // Ak klikol mimo menu (aj v tej istej položke), zatvor menu
+            if (!menu.contains(event.target)) {
+                closeMenuAndCleanup();
+            }
+        };
+
+        // Zatvoriť menu pri stlačení Escape
+        const closeMenuOnEscape = (event) => {
+            if (event.key === 'Escape') {
+                closeMenuAndCleanup();
+            }
+        };
+
+        // Zatvoriť menu pri strate focusu
+        const closeMenuOnBlur = () => {
+            closeMenuAndCleanup();
+        };
+
+        // Event listener pre kliknutie na menu
         menu.addEventListener('click', (e) => {
             if (e.target.classList.contains('export-option')) {
                 const format = e.target.dataset.format;
                 this.exportSingleItem(item, format);
-                menu.remove();
+                closeMenuAndCleanup();
             }
         });
 
-        // Zatvoriť pri kliknutí mimo menu
-        const closeMenu = (event) => {
-            if (!menu.contains(event.target) && !element.contains(event.target)) {
-                menu.remove();
-                document.removeEventListener('click', closeMenu);
-            }
-        };
+        // Pridať event listenerov (bez scroll a wheel)
+        document.addEventListener('click', closeMenuOnClickOutside);
+        document.addEventListener('keydown', closeMenuOnEscape);
+        window.addEventListener('blur', closeMenuOnBlur);
         
-        // Pridať event listener s oneskorením aby sa nevyvolal okamžite
-        setTimeout(() => {
-            document.addEventListener('click', closeMenu);
-        }, 100);
+        // Zatvoriť menu pri kliknutí na export tlačidlo tej istej položky (toggle)
+        const exportBtn = element.querySelector('.export-btn');
+        if (exportBtn) {
+            const toggleMenu = (e) => {
+                e.stopPropagation(); // Zabráň propagácii eventu
+                if (element.querySelector('.export-menu')) {
+                    closeMenuAndCleanup();
+                }
+            };
+            exportBtn.addEventListener('click', toggleMenu);
+        }
     }
 }
 

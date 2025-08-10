@@ -88,7 +88,7 @@
   "enablePremium": { "message": "プレミアムモードを有効化", "description": "プレミアムモード有効化ラベル" },
   "premiumIncludes": { "message": "プレミアム機能には以下が含まれます：", "description": "プレミアム機能含むラベル" },
   "unlimitedHistory": { "message": "無制限の履歴", "description": "無制限履歴機能" },
-  "exportTxtCsvPdf": { "message": "TXT/CSVにエクスポート", "description": "エクスポート機能" },
+  "exportTxtCsvPdf": { "message": "TXT/CSV/PDFにエクスポート", "description": "エクスポート機能" },
   "advancedTagging": { "message": "高度なタグ付け", "description": "高度なタグ付け機能" },
   "unlimitedTranslationsPro": {
     "message": "プロ版で無制限の翻訳！",
@@ -106,5 +106,8 @@
   "oneDay": { "message": "1日", "description": "自動削除1日" },
   "sevenDays": { "message": "7日", "description": "自動削除7日" },
   "thirtyDays": { "message": "30日", "description": "自動削除30日" },
-  "pdfExportSuccess": { "message": "PDFエクスポート成功！", "description": "PDFエクスポート成功通知" }
+  "pdfExportSuccess": { "message": "PDFエクスポート成功！", "description": "PDFエクスポート成功通知" },
+  "selectTranslationLanguage": { "message": "翻訳言語を選択：", "description": "翻訳言語選択ラベル" },
+  "translating": { "message": "翻訳中...", "description": "翻訳読み込みテキスト" },
+  "translationFailed": { "message": "翻訳に失敗しました。", "description": "翻訳失敗メッセージ" }
 } 

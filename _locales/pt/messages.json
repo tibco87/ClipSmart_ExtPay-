@@ -4,179 +4,179 @@
     "description": "The name of the extension"
   },
   "appDescription": {
-    "message": "Never lose copied text again. Clipboard manager with 18-language translator, search, tags. 20 free, Pro unlimited.",
+    "message": "Nunca perca texto copiado novamente. Gerenciador de área de transferência com tradutor de 18 idiomas, pesquisa, tags. 20 grátis, Pro ilimitado.",
     "description": "The description of the extension"
   },
   "recent": {
-    "message": "Recent",
+    "message": "Recentes",
     "description": "Recent tab"
   },
   "pinned": {
-    "message": "Pinned",
+    "message": "Fixados",
     "description": "Pinned tab"
   },
   "settings": {
-    "message": "Settings",
+    "message": "Configurações",
     "description": "Settings tab"
   },
   "searchPlaceholder": {
-    "message": "Search clipboard...",
+    "message": "Pesquisar área de transferência...",
     "description": "Search input placeholder"
   },
   "noClipboardItems": {
-    "message": "No clipboard items yet",
+    "message": "Nenhum item na área de transferência ainda",
     "description": "Empty state title"
   },
   "copyToGetStarted": {
-    "message": "Copy something to get started!",
+    "message": "Copie algo para começar!",
     "description": "Empty state subtitle"
   },
   "noPinnedItems": {
-    "message": "No pinned items",
+    "message": "Nenhum item fixado",
     "description": "No pinned items message"
   },
   "pinFavorites": {
-    "message": "Pin your favorite clips for quick access",
+    "message": "Fixar seus clipes favoritos para acesso rápido",
     "description": "Pin favorites message"
   },
   "appearance": {
-    "message": "Appearance",
+    "message": "Aparência",
     "description": "Appearance settings"
   },
   "theme": {
-    "message": "Theme",
+    "message": "Tema",
     "description": "Theme setting"
   },
   "language": {
-    "message": "Language",
+    "message": "Idioma",
     "description": "Language setting"
   },
   "interfaceLanguage": {
-    "message": "Interface Language",
+    "message": "Idioma da Interface",
     "description": "Interface language setting"
   },
   "storage": {
-    "message": "Storage",
+    "message": "Armazenamento",
     "description": "Storage settings"
   },
   "autoDeleteAfter": {
-    "message": "Auto-delete items after",
+    "message": "Excluir itens automaticamente após",
     "description": "Auto-delete setting"
   },
   "never": {
-    "message": "Never",
+    "message": "Nunca",
     "description": "Never option"
   },
   "clearAllItems": {
-    "message": "Clear All Items",
+    "message": "Limpar Todos os Itens",
     "description": "Clear all button"
   },
   "translation": {
-    "message": "Translation",
+    "message": "Tradução",
     "description": "Translation settings"
   },
   "defaultLanguages": {
-    "message": "Default languages",
+    "message": "Idiomas padrão",
     "description": "Default translation languages"
   },
   "translationsUsed": {
-    "message": "Translations used",
+    "message": "Traduções usadas",
     "description": "Translations used label"
   },
   "thisMonth": {
-    "message": "this month",
+    "message": "este mês",
     "description": "This month text"
   },
   "about": {
-    "message": "About",
+    "message": "Sobre",
     "description": "About section"
   },
   "privacyPolicy": {
-    "message": "Privacy Policy",
+    "message": "Política de Privacidade",
     "description": "Privacy policy link"
   },
   "support": {
-    "message": "Support",
+    "message": "Suporte",
     "description": "Support link"
   },
   "items": {
-    "message": "items",
+    "message": "itens",
     "description": "Items count label"
   },
   "expand": {
-    "message": "📄 Expand",
+    "message": "📄 Expandir",
     "description": "Expand long text"
   },
   "collapse": {
-    "message": "📄 Collapse",
+    "message": "📄 Recolher",
     "description": "Collapse long text"
   },
   "exportToPDF": {
-    "message": "Export to PDF",
+    "message": "Exportar para PDF",
     "description": "Export to PDF button"
   },
   "exportTxt": {
-    "message": "Export as TXT",
+    "message": "Exportar como TXT",
     "description": "Export as TXT option"
   },
   "exportCsv": {
-    "message": "Export as CSV",
+    "message": "Exportar como CSV",
     "description": "Export as CSV option"
   },
   "exportPdf": {
-    "message": "Export as PDF",
+    "message": "Exportar como PDF",
     "description": "Export as PDF option"
   },
   "upgradePro": {
-    "message": "Upgrade Pro",
+    "message": "Atualizar Pro",
     "description": "Upgrade to Pro button text"
   },
   "manageSubscription": {
-    "message": "Manage Subscription",
+    "message": "Gerenciar Assinatura",
     "description": "Manage subscription button text for Pro users"
   },
   "upgradeProTooltip": {
-    "message": "Upgrade to Pro for unlimited features",
+    "message": "Atualizar para Pro para recursos ilimitados",
     "description": "Tooltip for upgrade button"
   },
   "manageSubscriptionTooltip": {
-    "message": "Manage your Pro subscription",
+    "message": "Gerenciar sua assinatura Pro",
     "description": "Tooltip for manage subscription button"
   },
   "copied": {
-    "message": "Copied to clipboard!",
+    "message": "Copiado para área de transferência!",
     "description": "Copy success message"
   },
   "translationCopied": {
-    "message": "Translation copied!",
+    "message": "Tradução copiada!",
     "description": "Translation copy success"
   },
   "moreItemsAvailable": {
-    "message": "more items available",
+    "message": "mais itens disponíveis",
     "description": "More items message"
   },
   "unlimitedTranslations": {
-    "message": "Unlimited translations with Pro!",
+    "message": "Traduções ilimitadas com Pro!",
     "description": "Pro translations message"
   },
   "reachedTranslationLimit": {
-    "message": "You've reached the free translation limit. Upgrade to Pro for unlimited translations!",
+    "message": "Você atingiu o limite de traduções gratuitas. Atualize para Pro para traduções ilimitadas!",
     "description": "Translation limit message"
   },
   "confirmClearAll": {
-    "message": "Are you sure you want to clear all clipboard items?",
+    "message": "Tem certeza de que deseja limpar todos os itens da área de transferência?",
     "description": "Clear all confirmation"
   },
   "characters": {
-    "message": "characters",
+    "message": "caracteres",
     "description": "Characters count"
   },
   "justNow": {
-    "message": "Just now",
+    "message": "Agora mesmo",
     "description": "Just now time"
   },
   "minutesAgo": {
-    "message": "$MINUTES$m ago",
+    "message": "$MINUTES$m atrás",
     "description": "Minutes ago",
     "placeholders": {
       "minutes": {
@@ -185,7 +185,7 @@
     }
   },
   "hoursAgo": {
-    "message": "$HOURS$h ago",
+    "message": "$HOURS$h atrás",
     "description": "Hours ago",
     "placeholders": {
       "hours": {
@@ -194,7 +194,7 @@
     }
   },
   "daysAgo": {
-    "message": "$DAYS$d ago",
+    "message": "$DAYS$d atrás",
     "description": "Days ago",
     "placeholders": {
       "days": {
@@ -203,175 +203,167 @@
     }
   },
   "translate": {
-    "message": "Translate",
+    "message": "Traduzir",
     "description": "Translate button"
   },
   "pin": {
-    "message": "Pin",
+    "message": "Fixar",
     "description": "Pin button"
   },
   "unpin": {
-    "message": "Unpin",
+    "message": "Desfixar",
     "description": "Unpin button"
   },
   "copy": {
-    "message": "Copy",
+    "message": "Copiar",
     "description": "Copy button"
   },
   "delete": {
-    "message": "Delete",
+    "message": "Excluir",
     "description": "Delete button"
   },
   "translating": {
-    "message": "Translating...",
+    "message": "Traduzindo...",
     "description": "Translating loading"
   },
   "translationFailed": {
-    "message": "Translation failed. Please try again.",
+    "message": "Tradução falhou. Tente novamente.",
     "description": "Translation error"
   },
   "saveToClipSmart": {
-    "message": "Save to ClipSmart",
+    "message": "Salvar no ClipSmart",
     "description": "Context menu item"
   },
   "openClipSmart": {
-    "message": "Open ClipSmart",
+    "message": "Abrir ClipSmart",
     "description": "Command description"
   },
   "copyLastItem": {
-    "message": "Copy last clipboard item",
+    "message": "Copiar último item da área de transferência",
     "description": "Command description"
   },
-  "items": {
-    "message": "items",
-    "description": "Label for number of items"
-  },
   "sortBy": {
-    "message": "Sort by:",
+    "message": "Ordenar por:",
     "description": "Sort label"
   },
   "newest": {
-    "message": "Newest",
+    "message": "Mais recentes",
     "description": "Sort option"
   },
   "oldest": {
-    "message": "Oldest",
+    "message": "Mais antigos",
     "description": "Sort option"
   },
   "az": {
-    "message": "Alphabetically A-Z",
+    "message": "Alfabeticamente A-Z",
     "description": "Sort option"
   },
   "za": {
-    "message": "Alphabetically Z-A",
+    "message": "Alfabeticamente Z-A",
     "description": "Sort option"
   },
   "longest": {
-    "message": "Most characters",
+    "message": "Mais caracteres",
     "description": "Sort option"
   },
   "shortest": {
-    "message": "Fewest characters",
+    "message": "Menos caracteres",
     "description": "Sort option"
   },
   "premiumFeatures": {
-    "message": "Premium Features",
+    "message": "Recursos Premium",
     "description": "Premium features section title"
   },
   "enablePremium": {
-    "message": "Enable Premium Mode",
+    "message": "Ativar Modo Premium",
     "description": "Enable premium mode label"
   },
   "premiumModeActive": {
-    "message": "Premium Mode Active",
+    "message": "Modo Premium Ativo",
     "description": "Premium mode active label"
   },
   "premiumIncludes": {
-    "message": "Premium features include:",
+    "message": "Recursos premium incluem:",
     "description": "Premium features include label"
   },
   "unlimitedHistory": {
-    "message": "Unlimited history",
+    "message": "Histórico ilimitado",
     "description": "Unlimited history feature"
   },
   "exportTxtCsvPdf": {
-    "message": "Export to TXT/CSV/PDF",
+    "message": "Exportar para TXT/CSV/PDF",
     "description": "Export feature"
   },
   "advancedTagging": {
-    "message": "Advanced tagging",
+    "message": "Marcação avançada",
     "description": "Advanced tagging feature"
   },
   "unlimitedTranslationsPro": {
-    "message": "Unlimited translations with Pro!",
+    "message": "Traduções ilimitadas com Pro!",
     "description": "Banner or button for unlimited translations with Pro version"
   },
   "tooltipTranslate": {
-    "message": "Translate",
+    "message": "Traduzir",
     "description": "Tooltip for translate button"
   },
   "tooltipPin": {
-    "message": "Pin",
+    "message": "Fixar",
     "description": "Tooltip for pin button"
   },
   "tooltipCopy": {
-    "message": "Copy",
+    "message": "Copiar",
     "description": "Tooltip for copy button"
   },
   "tooltipDelete": {
-    "message": "Delete",
+    "message": "Excluir",
     "description": "Tooltip for delete button"
   },
   "tooltipExport": {
-    "message": "Export",
+    "message": "Exportar",
     "description": "Tooltip for export button"
   },
   "toggleTheme": {
-    "message": "Toggle theme",
+    "message": "Alternar tema",
     "description": "Tooltip for theme toggle button"
   },
   "themeAuto": {
-    "message": "Auto",
+    "message": "Automático",
     "description": "Theme option auto"
   },
   "themeLight": {
-    "message": "Light",
+    "message": "Claro",
     "description": "Theme option light"
   },
   "themeDark": {
-    "message": "Dark",
+    "message": "Escuro",
     "description": "Theme option dark"
   },
   "oneDay": {
-    "message": "1 day",
+    "message": "1 dia",
     "description": "Auto-delete 1 day"
   },
   "sevenDays": {
-    "message": "7 days",
+    "message": "7 dias",
     "description": "Auto-delete 7 days"
   },
   "thirtyDays": {
-    "message": "30 days",
+    "message": "30 dias",
     "description": "Auto-delete 30 days"
   },
   "close": {
-    "message": "Close",
+    "message": "Fechar",
     "description": "Close translation button"
   },
   "pdfExportSuccess": {
-    "message": "PDF export successful!",
+    "message": "Exportação PDF bem-sucedida!",
     "description": "PDF export success notification"
   },
   "selectTranslationLanguage": {
-    "message": "Select translation language:",
+    "message": "Selecionar idioma de tradução:",
     "description": "Select translation language label"
   },
-  "translating": {
-    "message": "Translating...",
-    "description": "Translating loading text"
-  },
   "translationFailed": {
-    "message": "Translation failed.",
+    "message": "Tradução falhou.",
     "description": "Translation failed message"
   }
 }

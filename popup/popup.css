@@ -281,7 +281,7 @@ body {
 
 /* Export menu */
 .export-menu {
-    position: absolute;
+    position: relative;
     background: var(--bg-primary);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -289,6 +289,8 @@ body {
     z-index: 1000;
     min-width: 120px;
     overflow: hidden;
+    margin-top: 5px;
+    animation: slideDown 0.2s ease-out;
 }
 
 .export-option {
@@ -578,6 +580,19 @@ body {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 200px;
     }
 }
 

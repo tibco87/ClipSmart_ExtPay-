@@ -267,7 +267,7 @@
     "description": "Ubegrænset historik funktion"
   },
   "exportTxtCsvPdf": {
-    "message": "Eksporter til TXT/CSV",
+    "message": "Eksporter til TXT/CSV/PDF",
     "description": "Eksport funktion"
   },
   "advancedTagging": {
@@ -361,5 +361,17 @@
   "pdfExportSuccess": {
     "message": "PDF eksport succesfuld!",
     "description": "PDF eksport succes notifikation"
+  },
+  "selectTranslationLanguage": {
+    "message": "Vælg oversættelsessprog:",
+    "description": "Vælg oversættelsessprog etiket"
+  },
+  "translating": {
+    "message": "Oversætter...",
+    "description": "Oversættelse indlæsning tekst"
+  },
+  "translationFailed": {
+    "message": "Oversættelse mislykkedes.",
+    "description": "Oversættelse fejl besked"
   }
 } 

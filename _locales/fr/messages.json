@@ -4,7 +4,7 @@
     "description": "Le nom de l'extension"
   },
   "appDescription": {
-    "message": "Ne perdez plus jamais de texte copié. Gestionnaire de presse-papiers avec traducteur 15 langues, recherche, tags. 20 gratuits, Pro illimité.",
+    "message": "Ne perdez plus jamais de texte copié. Gestionnaire de presse-papiers avec traducteur 18 langues, recherche, tags. 20 gratuits, Pro illimité.",
     "description": "La description de l'extension"
   },
   "recent": {
@@ -361,5 +361,17 @@
   "pdfExportSuccess": {
     "message": "Export PDF réussi !",
     "description": "Notification de succès d'export PDF"
+  },
+  "selectTranslationLanguage": {
+    "message": "Sélectionnez la langue de traduction :",
+    "description": "Sélectionner la langue de traduction label"
+  },
+  "translating": {
+    "message": "Traduction en cours...",
+    "description": "Texte de chargement de traduction"
+  },
+  "translationFailed": {
+    "message": "La traduction a échoué.",
+    "description": "Message d'échec de traduction"
   }
 } 

@@ -1,6 +1,6 @@
 {
   "appName": { "message": "ClipSmart", "description": "El nombre de la extensión" },
-  "appDescription": { "message": "Nunca pierdas texto copiado otra vez. Gestor de portapapeles con traductor de 15 idiomas, búsqueda, etiquetas. 20 gratis, Pro ilimitado.", "description": "La descripción de la extensión" },
+  "appDescription": { "message": "Nunca pierdas texto copiado otra vez. Gestor de portapapeles con traductor de 18 idiomas, búsqueda, etiquetas. 20 gratis, Pro ilimitado.", "description": "La descripción de la extensión" },
   "recent": { "message": "Recientes", "description": "Pestaña recientes" },
   "pinned": { "message": "Fijados", "description": "Pestaña fijados" },
   "settings": { "message": "Configuración", "description": "Pestaña configuración" },
@@ -74,6 +74,18 @@
   "tooltipExport": { "message": "Exportar", "description": "Tooltip botón exportar" },
   "toggleTheme": { "message": "Cambiar tema", "description": "Tooltip cambiar tema" },
   "pdfExportSuccess": { "message": "¡Exportación PDF exitosa!", "description": "Notificación de éxito de exportación PDF" },
+  "selectTranslationLanguage": {
+    "message": "Seleccione idioma de traducción:",
+    "description": "Seleccionar idioma de traducción etiqueta"
+  },
+  "translating": {
+    "message": "Traduciendo...",
+    "description": "Texto de carga de traducción"
+  },
+  "translationFailed": {
+    "message": "La traducción falló.",
+    "description": "Mensaje de fallo de traducción"
+  },
   "themeAuto": { "message": "Auto", "description": "Opción tema auto" },
   "themeLight": { "message": "Claro", "description": "Opción tema claro" },
   "themeDark": { "message": "Oscuro", "description": "Opción tema oscuro" },

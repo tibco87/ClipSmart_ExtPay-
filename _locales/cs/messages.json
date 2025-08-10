@@ -1,6 +1,6 @@
 {
   "appName": { "message": "ClipSmart", "description": "Název rozšíření" },
-  "appDescription": { "message": "Už nikdy neztratíte zkopírovaný text. Správce schránky s překladačem do 15 jazyků, vyhledávání, štítky. 20 zdarma, Pro neomezeně.", "description": "Popis rozšíření" },
+  "appDescription": { "message": "Už nikdy neztratíte zkopírovaný text. Správce schránky s překladačem do 18 jazyků, vyhledávání, štítky. 20 zdarma, Pro neomezeně.", "description": "Popis rozšíření" },
   "recent": { "message": "Nedávné", "description": "Záložka nedávné" },
   "pinned": { "message": "Připnuté", "description": "Záložka připnuté" },
   "settings": { "message": "Nastavení", "description": "Záložka nastavení" },
@@ -99,6 +99,9 @@
   "tooltipExport": { "message": "Stáhnout", "description": "Tooltip tlačítko exportovat" },
   "toggleTheme": { "message": "Změnit motiv", "description": "Tooltip tlačítko změnit motiv" },
   "pdfExportSuccess": { "message": "PDF export úspěšný!", "description": "PDF export success notification" },
+  "selectTranslationLanguage": { "message": "Vyberte jazyk překladu:", "description": "Select translation language label" },
+  "translating": { "message": "Překládání...", "description": "Translating loading text" },
+  "translationFailed": { "message": "Překlad se nezdařil.", "description": "Translation failed message" },
   "themeAuto": { "message": "Auto", "description": "Možnost motiv auto" },
   "themeLight": { "message": "Světlý", "description": "Možnost motiv světlý" },
   "themeDark": { "message": "Tmavý", "description": "Možnost motiv tmavý" },

@@ -4,7 +4,7 @@
     "description": "Il nome dell'estensione"
   },
   "appDescription": {
-    "message": "Non perdere mai più il testo copiato. Gestore appunti con traduttore 15 lingue, ricerca, tag. 20 gratis, Pro illimitato.",
+    "message": "Non perdere mai più il testo copiato. Gestore appunti con traduttore 18 lingue, ricerca, tag. 20 gratis, Pro illimitato.",
     "description": "La descrizione dell'estensione"
   },
   "recent": {
@@ -267,7 +267,7 @@
     "description": "Funzionalità cronologia illimitata"
   },
   "exportTxtCsvPdf": {
-    "message": "Esporta in TXT/CSV",
+    "message": "Esporta in TXT/CSV/PDF",
     "description": "Funzionalità esporta"
   },
   "advancedTagging": {
@@ -361,5 +361,17 @@
   "pdfExportSuccess": {
     "message": "Esportazione PDF riuscita!",
     "description": "Notifica di successo esportazione PDF"
+  },
+  "selectTranslationLanguage": {
+    "message": "Seleziona lingua di traduzione:",
+    "description": "Seleziona lingua di traduzione etichetta"
+  },
+  "translating": {
+    "message": "Traduzione in corso...",
+    "description": "Testo di caricamento traduzione"
+  },
+  "translationFailed": {
+    "message": "Traduzione fallita.",
+    "description": "Messaggio di errore traduzione"
   }
 } 
