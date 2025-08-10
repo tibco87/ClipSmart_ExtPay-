@@ -564,10 +564,10 @@ class ClipSmart {
         if (sortSelect) {
             sortSelect.addEventListener('change', (e) => {
                 this.sortOrder = e.target.value;
-                this.renderItems();
+                // Volaj renderContent() namiesto renderItems() aby fungoval sort aj v Pinned záložke
+                this.renderContent();
                 // Ulož sortOrder do storage
                 chrome.storage.local.set({ sortOrder: this.sortOrder });
-                // updateUIText() sa nevolá pre zmenu sortOrder, len renderItems()
             });
         }
     }
@@ -705,7 +705,30 @@ class ClipSmart {
         emptyState.style.display = 'none';
         container.innerHTML = '';
 
-        filteredPinned.forEach(item => {
+        // Aplikuj zoradenie na pinned položky rovnako ako pri recent položkách
+        let itemsToShow = [...filteredPinned];
+        switch (this.sortOrder) {
+            case 'newest':
+                itemsToShow.sort((a, b) => b.timestamp - a.timestamp);
+                break;
+            case 'oldest':
+                itemsToShow.sort((a, b) => a.timestamp - b.timestamp);
+                break;
+            case 'az':
+                itemsToShow.sort((a, b) => a.text.localeCompare(b.text));
+                break;
+            case 'za':
+                itemsToShow.sort((a, b) => b.text.localeCompare(a.text));
+                break;
+            case 'longest':
+                itemsToShow.sort((a, b) => b.charCount - a.charCount);
+                break;
+            case 'shortest':
+                itemsToShow.sort((a, b) => a.charCount - b.charCount);
+                break;
+        }
+
+        itemsToShow.forEach(item => {
             const element = this.createItemElement(item);
             container.appendChild(element);
         });
