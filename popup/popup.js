@@ -33,7 +33,7 @@ class ClipSmart {
         this.applyTheme();
         this.renderContent();
         this.updateItemCount();
-        this.updateUIText();
+        this.updateUIText(); // Presunuté sem po načítaní všetkých dát
         this.updatePremiumModeCheckbox();
         
         // Kontrola jsPDF načítania
@@ -77,7 +77,7 @@ class ClipSmart {
             
             this.isPro = user.paid;
             this.updateLimits();
-            this.updateUIText();
+            this.updateUIText(); // Aktualizuje UI vrátane sortSelect
             this.updatePremiumModeCheckbox();
             this.updateUpgradeButton();
             
@@ -152,6 +152,7 @@ class ClipSmart {
                 this.isPro = true;
                 await chrome.storage.local.set({ isPro: true });
                 console.log('✅ Updated isPro status to true');
+                this.updateUIText(); // Aktualizuje UI vrátane sortSelect
             }
             
         } catch (error) {
@@ -426,12 +427,14 @@ class ClipSmart {
                 await chrome.storage.local.set({ isPro: true });
                 console.log('✅ Updated isPro status to true from ExtensionPay data');
                 this.updateUpgradeButton();
+                this.updateUIText(); // Aktualizuje UI vrátane sortSelect
             } else if (extensionpayUser && !extensionpayUser.paid && this.isPro) {
                 console.log('⚠️ User is not paid in ExtensionPay data, updating isPro status');
                 this.isPro = false;
                 await chrome.storage.local.set({ isPro: false });
                 console.log('✅ Updated isPro status to false from ExtensionPay data');
                 this.updateUpgradeButton();
+                this.updateUIText(); // Aktualizuje UI vrátane sortSelect
             }
             
         } catch (error) {
@@ -455,6 +458,7 @@ class ClipSmart {
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', (e) => {
                 this.switchTab(e.target.dataset.tab);
+                // updateUIText() sa nevolá pre zmenu tabov, len renderContent()
             });
         });
 
@@ -463,27 +467,31 @@ class ClipSmart {
         searchInput.addEventListener('input', (e) => {
             this.searchQuery = e.target.value;
             this.filterItems();
-            this.renderItems();
+            // Volaj renderContent() namiesto renderItems() aby fungoval search aj v Pinned záložke
+            this.renderContent();
         });
 
         // Theme toggle
         document.getElementById('themeToggle').addEventListener('click', () => {
             this.toggleTheme();
+            // updateUIText() sa nevolá pre zmenu témy, len toggleTheme()
         });
 
         // Settings
         document.getElementById('themeSelect').addEventListener('change', (e) => {
             this.updateSetting('theme', e.target.value);
             this.applyTheme();
+            // updateUIText() sa nevolá pre zmenu témy, len applyTheme()
         });
 
         document.getElementById('languageSelect').addEventListener('change', (e) => {
             this.updateSetting('language', e.target.value);
-            this.updateUIText();
+            // updateUIText() sa volá v updateSetting() pre zmenu jazyka
         });
 
         document.getElementById('autoDeleteSelect').addEventListener('change', (e) => {
             this.updateSetting('autoDelete', e.target.value);
+            // updateUIText() sa nevolá pre zmenu auto-delete
         });
 
         // Translation language selects
@@ -502,6 +510,7 @@ class ClipSmart {
             select.addEventListener('change', (e) => {
                 this.settings.translationLangs[index] = e.target.value;
                 this.updateSetting('translationLangs', this.settings.translationLangs);
+                // updateUIText() sa nevolá pre zmenu translation languages
             });
         });
 
@@ -547,6 +556,7 @@ class ClipSmart {
         // Premium mode toggle
         document.getElementById('premiumMode').addEventListener('change', (e) => {
             this.togglePremiumMode(e.target.checked);
+            // updateUIText() sa volá v togglePremiumMode() ak je potrebné
         });
 
         // Zoradenie
@@ -557,6 +567,7 @@ class ClipSmart {
                 this.renderItems();
                 // Ulož sortOrder do storage
                 chrome.storage.local.set({ sortOrder: this.sortOrder });
+                // updateUIText() sa nevolá pre zmenu sortOrder, len renderItems()
             });
         }
     }
@@ -1105,7 +1116,7 @@ class ClipSmart {
         if (key === 'language') {
             this.locale = value;
             await this.loadMessages();
-            this.updateUIText();
+            this.updateUIText(); // Aktualizuje UI vrátane sortSelect
             this.renderContent();
         }
     }
