@@ -310,6 +310,10 @@
     "message": "Fixar",
     "description": "Tooltip for pin button"
   },
+  "tooltipUnpin": {
+    "message": "Desafixar",
+    "description": "Tooltip for unpin button"
+  },
   "tooltipCopy": {
     "message": "Copiar",
     "description": "Tooltip for copy button"

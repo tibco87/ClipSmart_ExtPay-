@@ -311,11 +311,12 @@
     "description": "Çevir düğmesi için ipucu"
   },
   "tooltipPin": {
+    "message": "Sabitle",
+    "description": "Sabitle düğmesi için ipucu"
+  },
   "tooltipUnpin": {
     "message": "Çıkar",
     "description": "Tooltip for unpin button"
-  },    "message": "Sabitle",
-    "description": "Sabitle düğmesi için ipucu"
   },
   "tooltipCopy": {
     "message": "Kopyala",

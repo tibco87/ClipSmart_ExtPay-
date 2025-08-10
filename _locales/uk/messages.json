@@ -69,7 +69,8 @@
   "tooltipUnpin": {
     "message": "Відкріпити",
     "description": "Tooltip for unpin button"
-  },  "tooltipCopy": { "message": "Копіювати", "description": "Tooltip кнопка копіювати" },
+  },
+  "tooltipCopy": { "message": "Копіювати", "description": "Tooltip кнопка копіювати" },
   "tooltipDelete": { "message": "Видалити", "description": "Tooltip кнопка видалити" },
   "tooltipExport": { "message": "Експортувати", "description": "Tooltip кнопка експортувати" },
   "toggleTheme": { "message": "Перемкнути тему", "description": "Tooltip перемкнути тему" },

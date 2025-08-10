@@ -69,7 +69,8 @@
   "tooltipUnpin": {
     "message": "Odpiń",
     "description": "Tooltip for unpin button"
-  },  "tooltipCopy": { "message": "Kopiuj", "description": "Tooltip przycisk kopiuj" },
+  },
+  "tooltipCopy": { "message": "Kopiuj", "description": "Tooltip przycisk kopiuj" },
   "tooltipDelete": { "message": "Usuń", "description": "Tooltip przycisk usuń" },
   "tooltipExport": { "message": "Eksportuj", "description": "Tooltip przycisk eksportuj" },
   "toggleTheme": { "message": "Przełącz motyw", "description": "Tooltip przełącz motyw" },

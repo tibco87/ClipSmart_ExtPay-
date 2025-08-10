@@ -96,7 +96,8 @@
   "tooltipUnpin": {
     "message": "अनपिन करें",
     "description": "Tooltip for unpin button"
-  },  "tooltipCopy": { "message": "कॉपी करें", "description": "कॉपी बटन टूलटिप" },
+  },
+  "tooltipCopy": { "message": "कॉपी करें", "description": "कॉपी बटन टूलटिप" },
   "tooltipDelete": { "message": "हटाएं", "description": "हटाने का बटन टूलटिप" },
   "tooltipExport": { "message": "निर्यात करें", "description": "निर्यात बटन टूलटिप" },
   "toggleTheme": { "message": "थीम बदलें", "description": "थीम बदलने का टूलटिप" },

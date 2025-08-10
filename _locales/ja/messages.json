@@ -99,7 +99,8 @@
   "tooltipUnpin": {
     "message": "固定解除",
     "description": "Tooltip for unpin button"
-  },  "tooltipCopy": { "message": "コピー", "description": "コピーボタンのツールチップ" },
+  },
+  "tooltipCopy": { "message": "コピー", "description": "コピーボタンのツールチップ" },
   "tooltipDelete": { "message": "削除", "description": "削除ボタンのツールチップ" },
   "tooltipExport": { "message": "エクスポート", "description": "エクスポートボタンのツールチップ" },
   "toggleTheme": { "message": "テーマを切り替え", "description": "テーマ切り替えツールチップ" },
