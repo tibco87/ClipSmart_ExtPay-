@@ -96,7 +96,10 @@
   },
   "tooltipTranslate": { "message": "번역", "description": "번역 버튼 툴팁" },
   "tooltipPin": { "message": "고정", "description": "고정 버튼 툴팁" },
-  "tooltipCopy": { "message": "복사", "description": "복사 버튼 툴팁" },
+  "tooltipUnpin": {
+    "message": "고정 해제",
+    "description": "Tooltip for unpin button"
+  },  "tooltipCopy": { "message": "복사", "description": "복사 버튼 툴팁" },
   "tooltipDelete": { "message": "삭제", "description": "삭제 버튼 툴팁" },
   "tooltipExport": { "message": "내보내기", "description": "내보내기 버튼 툴팁" },
   "toggleTheme": { "message": "테마 전환", "description": "테마 전환 툴팁" },

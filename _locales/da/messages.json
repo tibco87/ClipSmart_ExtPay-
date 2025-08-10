@@ -286,6 +286,10 @@
     "message": "Fastgør",
     "description": "Tooltip for fastgør knap"
   },
+  "tooltipUnpin": {
+    "message": "Løsne",
+    "description": "Tooltip for unpin button"
+  },
   "tooltipCopy": {
     "message": "Kopier",
     "description": "Tooltip for kopier knap"

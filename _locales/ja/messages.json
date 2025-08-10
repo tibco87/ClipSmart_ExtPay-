@@ -96,7 +96,10 @@
   },
   "tooltipTranslate": { "message": "翻訳", "description": "翻訳ボタンのツールチップ" },
   "tooltipPin": { "message": "ピン留め", "description": "ピン留めボタンのツールチップ" },
-  "tooltipCopy": { "message": "コピー", "description": "コピーボタンのツールチップ" },
+  "tooltipUnpin": {
+    "message": "固定解除",
+    "description": "Tooltip for unpin button"
+  },  "tooltipCopy": { "message": "コピー", "description": "コピーボタンのツールチップ" },
   "tooltipDelete": { "message": "削除", "description": "削除ボタンのツールチップ" },
   "tooltipExport": { "message": "エクスポート", "description": "エクスポートボタンのツールチップ" },
   "toggleTheme": { "message": "テーマを切り替え", "description": "テーマ切り替えツールチップ" },

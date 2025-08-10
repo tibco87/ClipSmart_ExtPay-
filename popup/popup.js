@@ -771,7 +771,17 @@ class ClipSmart {
 
         // Nastav dynamické tooltipy
         element.querySelector('.translate-btn').title = this.getMessage('tooltipTranslate');
-        element.querySelector('.pin-btn').title = this.getMessage('tooltipPin');
+        
+        // Dynamicky nastav tooltip pre pin button podľa stavu a záložky
+        const pinBtn = element.querySelector('.pin-btn');
+        if (item.pinned && this.currentTab === 'pinned') {
+            // Ak je položka pripnutá a sme v záložke "Pripnuté", zobraz "Odopnúť"
+            pinBtn.title = this.getMessage('tooltipUnpin');
+        } else {
+            // Inak zobraz "Pripnúť"
+            pinBtn.title = this.getMessage('tooltipPin');
+        }
+        
         element.querySelector('.copy-btn').title = this.getMessage('tooltipCopy');
         element.querySelector('.delete-btn').title = this.getMessage('tooltipDelete');
         element.querySelector('.export-btn').title = this.getMessage('tooltipExport');
@@ -797,6 +807,18 @@ class ClipSmart {
         pinBtn.addEventListener('click', () => {
             this.togglePin(item.id);
         });
+        
+        // Aktualizuj tooltip pre pin button po kliknutí
+        const updatePinTooltip = () => {
+            if (item.pinned && this.currentTab === 'pinned') {
+                pinBtn.title = this.getMessage('tooltipUnpin');
+            } else {
+                pinBtn.title = this.getMessage('tooltipPin');
+            }
+        };
+        
+        // Pridaj event listener pre aktualizáciu tooltipu
+        pinBtn.addEventListener('mouseenter', updatePinTooltip);
 
         // Delete button
         element.querySelector('.delete-btn').addEventListener('click', () => {

@@ -314,6 +314,10 @@
     "message": "Pin",
     "description": "Tooltip for pin button"
   },
+  "tooltipUnpin": {
+    "message": "Unpin",
+    "description": "Tooltip for unpin button"
+  },
   "tooltipCopy": {
     "message": "Copy",
     "description": "Tooltip for copy button"

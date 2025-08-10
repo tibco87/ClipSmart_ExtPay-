@@ -66,7 +66,10 @@
   "unlimitedTranslations": { "message": "Nieograniczone tłumaczenia", "description": "Funkcja nieograniczonych tłumaczeń" },
   "tooltipTranslate": { "message": "Tłumacz", "description": "Tooltip przycisk tłumacz" },
   "tooltipPin": { "message": "Przypnij", "description": "Tooltip przycisk przypnij" },
-  "tooltipCopy": { "message": "Kopiuj", "description": "Tooltip przycisk kopiuj" },
+  "tooltipUnpin": {
+    "message": "Odpiń",
+    "description": "Tooltip for unpin button"
+  },  "tooltipCopy": { "message": "Kopiuj", "description": "Tooltip przycisk kopiuj" },
   "tooltipDelete": { "message": "Usuń", "description": "Tooltip przycisk usuń" },
   "tooltipExport": { "message": "Eksportuj", "description": "Tooltip przycisk eksportuj" },
   "toggleTheme": { "message": "Przełącz motyw", "description": "Tooltip przełącz motyw" },

@@ -270,6 +270,10 @@
     "message": "Épingler",
     "description": "Tooltip bouton épingler"
   },
+  "tooltipUnpin": {
+    "message": "Désépingler",
+    "description": "Tooltip for unpin button"
+  },
   "tooltipCopy": {
     "message": "Copier",
     "description": "Tooltip bouton copier"

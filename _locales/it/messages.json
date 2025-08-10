@@ -314,6 +314,10 @@
     "message": "Appunta",
     "description": "Tooltip pulsante appunta"
   },
+  "tooltipUnpin": {
+    "message": "Stacca",
+    "description": "Tooltip for unpin button"
+  },
   "tooltipCopy": {
     "message": "Copia",
     "description": "Tooltip pulsante copia"

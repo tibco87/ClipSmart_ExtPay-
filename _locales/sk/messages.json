@@ -307,7 +307,10 @@
     "description": "Tooltip for translate button"
   },
   "tooltipPin": {
-    "message": "Pripnúť",
+  "tooltipUnpin": {
+    "message": "Odopnúť",
+    "description": "Tooltip for unpin button"
+  },    "message": "Pripnúť",
     "description": "Tooltip for pin button"
   },
   "tooltipCopy": {

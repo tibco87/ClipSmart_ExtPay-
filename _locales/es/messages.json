@@ -69,6 +69,7 @@
   "unlimitedTranslations": { "message": "Traducciones ilimitadas", "description": "Función traducciones ilimitadas" },
   "tooltipTranslate": { "message": "Traducir", "description": "Tooltip botón traducir" },
   "tooltipPin": { "message": "Fijar", "description": "Tooltip botón fijar" },
+  "tooltipUnpin": { "message": "Desfijar", "description": "Tooltip for unpin button" },
   "tooltipCopy": { "message": "Copiar", "description": "Tooltip botón copiar" },
   "tooltipDelete": { "message": "Eliminar", "description": "Tooltip botón eliminar" },
   "tooltipExport": { "message": "Exportar", "description": "Tooltip botón exportar" },

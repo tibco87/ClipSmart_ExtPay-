@@ -66,7 +66,10 @@
   "unlimitedTranslations": { "message": "无限翻译", "description": "无限翻译功能" },
   "tooltipTranslate": { "message": "翻译", "description": "翻译按钮提示" },
   "tooltipPin": { "message": "固定", "description": "固定按钮提示" },
-  "tooltipCopy": { "message": "复制", "description": "复制按钮提示" },
+  "tooltipUnpin": {
+    "message": "取消固定",
+    "description": "Tooltip for unpin button"
+  },  "tooltipCopy": { "message": "复制", "description": "复制按钮提示" },
   "tooltipDelete": { "message": "删除", "description": "删除按钮提示" },
   "tooltipExport": { "message": "导出", "description": "导出按钮提示" },
   "toggleTheme": { "message": "切换主题", "description": "切换主题提示" },

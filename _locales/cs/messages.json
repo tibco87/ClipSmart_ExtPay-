@@ -94,6 +94,7 @@
   "unlimitedTranslations": { "message": "Neomezené překlady", "description": "Funkce neomezených překladů" },
   "tooltipTranslate": { "message": "Přeložit", "description": "Tooltip tlačítko přeložit" },
   "tooltipPin": { "message": "Připnout", "description": "Tooltip tlačítko připnout" },
+  "tooltipUnpin": { "message": "Odepnout", "description": "Tooltip tlačítko odepnout" },
   "tooltipCopy": { "message": "Kopírovat", "description": "Tooltip tlačítko kopírovat" },
   "tooltipDelete": { "message": "Smazat", "description": "Tooltip tlačítko smazat" },
   "tooltipExport": { "message": "Stáhnout", "description": "Tooltip tlačítko exportovat" },

@@ -266,6 +266,10 @@
     "message": "Anheften",
     "description": "Tooltip für Anheften-Button"
   },
+  "tooltipUnpin": {
+    "message": "Lösen",
+    "description": "Tooltip für unpin button"
+  },
   "tooltipCopy": {
     "message": "Kopieren",
     "description": "Tooltip für Kopieren-Button"
