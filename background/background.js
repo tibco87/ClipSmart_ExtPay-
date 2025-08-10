@@ -140,6 +140,10 @@ chrome.runtime.onInstalled.addListener(async (details) => {
             // Move to top
             const [existing] = items.splice(existingIndex, 1);
             existing.timestamp = Date.now();
+            // Pridaj charCount ak neexistuje
+            if (typeof existing.charCount === 'undefined') {
+                existing.charCount = existing.text.length;
+            }
             items.unshift(existing);
         } else {
             // Create new item
@@ -148,7 +152,8 @@ chrome.runtime.onInstalled.addListener(async (details) => {
                 text: text,
                 type: this.detectType(text),
                 timestamp: Date.now(),
-                tags: new Set()
+                tags: new Set(),
+                charCount: text.length // Pridaj charCount pre zoradenie podľa dĺžky
             };
             
             // Check limits for free users

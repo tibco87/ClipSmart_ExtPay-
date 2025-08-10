@@ -15,7 +15,7 @@ class ClipSmart {
         this.tags = new Set();
         this.translationLimit = 5; // 5 prekladov mesačne pre free verziu
         this.availableLanguages = ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'uk', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
-        this.sortOrder = 'newest';
+        this.sortOrder = 'newest'; // Predvolené zoradenie
         this.locale = 'en';
         this.messages = {};
         this.extpay = null;
@@ -243,6 +243,9 @@ class ClipSmart {
             sortSelect.options[3].text = this.getMessage('za') || 'Alphabetically Z-A';
             sortSelect.options[4].text = this.getMessage('longest') || 'Most characters';
             sortSelect.options[5].text = this.getMessage('shortest') || 'Fewest characters';
+            
+            // Nastav aktuálnu hodnotu sortSelect podľa this.sortOrder
+            sortSelect.value = this.sortOrder;
         }
         
         // Empty states
@@ -353,7 +356,7 @@ class ClipSmart {
 
     async loadData() {
         try {
-            const data = await chrome.storage.local.get(['clipboardItems', 'settings', 'isPro', 'tags']);
+            const data = await chrome.storage.local.get(['clipboardItems', 'settings', 'isPro', 'tags', 'sortOrder']);
             this.clipboardItems = (data.clipboardItems || []).map(item => {
                 if (item.tags) {
                     if (Array.isArray(item.tags)) {
@@ -364,12 +367,26 @@ class ClipSmart {
                         item.tags = new Set();
                     }
                 }
+                
+                // Pridaj charCount property pre zoradenie podľa dĺžky
+                if (item.text && typeof item.text === 'string') {
+                    item.charCount = item.text.length;
+                } else {
+                    item.charCount = 0;
+                }
+                
+                // Ak položka nemá charCount, pridaj ho
+                if (typeof item.charCount === 'undefined' && item.text) {
+                    item.charCount = item.text.length;
+                }
+                
                 return item;
             });
             
             // Load Pro status from storage (will be updated by ExtensionPay)
             this.isPro = data.isPro || false;
             this.settings = data.settings || this.getDefaultSettings();
+            this.sortOrder = data.sortOrder || 'newest'; // Načítaj sortOrder z storage
             
             // Load tags
             if (data.tags) {
@@ -538,6 +555,8 @@ class ClipSmart {
             sortSelect.addEventListener('change', (e) => {
                 this.sortOrder = e.target.value;
                 this.renderItems();
+                // Ulož sortOrder do storage
+                chrome.storage.local.set({ sortOrder: this.sortOrder });
             });
         }
     }
@@ -992,7 +1011,8 @@ class ClipSmart {
             await chrome.storage.local.set({ 
                 clipboardItems: itemsToSave,
                 tags: this.tags && this.tags instanceof Set ? Array.from(this.tags) : [],
-                isPro: this.isPro
+                isPro: this.isPro,
+                sortOrder: this.sortOrder // Ulož sortOrder do storage
             });
         } catch (error) {
             console.error('Error saving data:', error);
