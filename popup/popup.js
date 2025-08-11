@@ -449,7 +449,7 @@ class ClipSmart {
             theme: 'auto',
             language: 'en',
             autoDelete: 'never',
-            translationLangs: ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'nl', 'da', 'sv', 'no', 'fi', 'hr', 'sl', 'bg', 'sr', 'cs', 'sk', 'hu', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn']
+            translationLangs: ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'nl', 'da', 'sv', 'no', 'fi', 'hr', 'sl', 'bg', 'sr', 'ro', 'lv', 'lt', 'et', 'ur', 'fa', 'th', 'cs', 'sk', 'hu', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn']
         };
     }
 
@@ -495,7 +495,7 @@ class ClipSmart {
         });
 
         // Translation language selects
-        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pl', 'nl', 'da', 'sv', 'no', 'fi', 'hr', 'sl', 'bg', 'sr', 'cs', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn'];
+        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pl', 'nl', 'da', 'sv', 'no', 'fi', 'hr', 'sl', 'bg', 'sr', 'ro', 'lv', 'lt', 'et', 'ur', 'fa', 'th', 'cs', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn'];
         ['transLang1', 'transLang2', 'transLang3'].forEach((id, index) => {
             const select = document.getElementById(id);
             // Vymaž existujúce možnosti
@@ -928,6 +928,13 @@ class ClipSmart {
                     <option value="sl">Slovenian</option>
                     <option value="bg">Bulgarian</option>
                     <option value="sr">Serbian</option>
+                    <option value="ro">Romanian</option>
+                    <option value="lv">Latvian</option>
+                    <option value="lt">Lithuanian</option>
+                    <option value="et">Estonian</option>
+                    <option value="ur">Urdu</option>
+                    <option value="fa">Persian/Farsi</option>
+                    <option value="th">Thai</option>
                     <option value="cs">Czech</option>
                     <option value="sk">Slovak</option>
                     <option value="hu">Hungarian</option>
