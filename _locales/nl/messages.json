@@ -112,8 +112,8 @@
     "description": "Lange tekst inklappen"
   },
   "exportToPDF": {
-    "message": "Export naar PDF",
-    "description": "Export naar PDF knop"
+    "message": "Alles exporteren naar PDF",
+    "description": "Exporteer alle items naar PDF knop"
   },
   "exportTxt": {
     "message": "Export als TXT",

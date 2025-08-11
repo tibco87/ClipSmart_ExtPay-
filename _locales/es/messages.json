@@ -107,8 +107,8 @@
     "description": "Collapse long text"
   },
   "exportToPDF": {
-    "message": "Exportar a PDF",
-    "description": "Export to PDF button"
+    "message": "Exportar todo a PDF",
+    "description": "Export all items to PDF button"
   },
   "exportTxt": {
     "message": "Exportar como TXT",

@@ -112,8 +112,8 @@
     "description": "Свернуть длинный текст"
   },
   "exportToPDF": {
-    "message": "Экспорт в PDF",
-    "description": "Кнопка экспорта в PDF"
+    "message": "Экспорт всего в PDF",
+    "description": "Кнопка экспорта всех элементов в PDF"
   },
   "exportTxt": {
     "message": "Экспорт как TXT",

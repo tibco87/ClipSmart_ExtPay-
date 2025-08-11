@@ -112,8 +112,8 @@
     "description": "Thu gọn văn bản dài"
   },
   "exportToPDF": {
-    "message": "Xuất ra PDF",
-    "description": "Nút xuất ra PDF"
+    "message": "Xuất tất cả ra PDF",
+    "description": "Nút xuất tất cả mục ra PDF"
   },
   "exportTxt": {
     "message": "Xuất dưới dạng TXT",

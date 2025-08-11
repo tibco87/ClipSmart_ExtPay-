@@ -62,8 +62,8 @@
     "description": "Collapse long text"
   },
   "exportToPDF": {
-    "message": "PDF로 내보내기",
-    "description": "Export to PDF button"
+    "message": "모두 PDF로 내보내기",
+    "description": "Export all items to PDF button"
   },
   "exportTxt": {
     "message": "TXT로 내보내기",

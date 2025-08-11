@@ -62,8 +62,8 @@
     "description": "Collapse long text"
   },
   "exportToPDF": {
-    "message": "Exportovat do PDF",
-    "description": "Export to PDF button"
+    "message": "Exportovat vše do PDF",
+    "description": "Export all items to PDF button"
   },
   "exportTxt": {
     "message": "Exportovat jako TXT",

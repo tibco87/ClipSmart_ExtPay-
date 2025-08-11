@@ -112,8 +112,8 @@
     "description": "Kollapsa lång text"
   },
   "exportToPDF": {
-    "message": "Exportera till PDF",
-    "description": "Exportera till PDF knapp"
+    "message": "Exportera allt till PDF",
+    "description": "Exportera alla objekt till PDF knapp"
   },
   "exportTxt": {
     "message": "Exportera som TXT",
