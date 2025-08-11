@@ -1,0 +1,369 @@
+{
+  "appName": {
+    "message": "ClipSmart",
+    "description": "Namnet på tillägget"
+  },
+  "appDescription": {
+    "message": "Förlora aldrig kopierad text igen. Urklippshanterare med 24-språks översättare, sökning, taggar. 20 gratis, Pro obegränsat.",
+    "description": "Beskrivningen av tillägget"
+  },
+  "recent": {
+    "message": "Senaste",
+    "description": "Senaste flik"
+  },
+  "pinned": {
+    "message": "Fästa",
+    "description": "Fästa flik"
+  },
+  "settings": {
+    "message": "Inställningar",
+    "description": "Inställningar flik"
+  },
+  "searchPlaceholder": {
+    "message": "Sök i urklipp...",
+    "description": "Sök input placeholder"
+  },
+  "noClipboardItems": {
+    "message": "Inga urklipp ännu",
+    "description": "Tom status titel"
+  },
+  "copyToGetStarted": {
+    "message": "Kopiera något för att komma igång!",
+    "description": "Tom status undertitel"
+  },
+  "noPinnedItems": {
+    "message": "Inga fästa objekt",
+    "description": "Inga fästa objekt meddelande"
+  },
+  "pinFavorites": {
+    "message": "Fäst dina favoritklipp för snabb åtkomst",
+    "description": "Fäst favoriter meddelande"
+  },
+  "appearance": {
+    "message": "Utseende",
+    "description": "Utseende inställningar"
+  },
+  "theme": {
+    "message": "Tema",
+    "description": "Tema inställning"
+  },
+  "language": {
+    "message": "Språk",
+    "description": "Språk inställning"
+  },
+  "interfaceLanguage": {
+    "message": "Gränssnittsspråk",
+    "description": "Gränssnittsspråk inställning"
+  },
+  "storage": {
+    "message": "Lagring",
+    "description": "Lagring inställningar"
+  },
+  "autoDeleteAfter": {
+    "message": "Auto-radera objekt efter",
+    "description": "Auto-radera inställning"
+  },
+  "never": {
+    "message": "Aldrig",
+    "description": "Aldrig alternativ"
+  },
+  "clearAllItems": {
+    "message": "Rensa Alla Objekt",
+    "description": "Rensa allt knapp"
+  },
+  "translation": {
+    "message": "Översättning",
+    "description": "Översättning inställningar"
+  },
+  "defaultLanguages": {
+    "message": "Standardspråk",
+    "description": "Standard översättningsspråk"
+  },
+  "translationsUsed": {
+    "message": "Översättningar använda",
+    "description": "Översättningar använda etikett"
+  },
+  "thisMonth": {
+    "message": "denna månad",
+    "description": "Denna månad text"
+  },
+  "about": {
+    "message": "Om",
+    "description": "Om sektion"
+  },
+  "privacyPolicy": {
+    "message": "Integritetspolicy",
+    "description": "Integritetspolicy länk"
+  },
+  "support": {
+    "message": "Support",
+    "description": "Support länk"
+  },
+  "items": {
+    "message": "objekt",
+    "description": "Objekt antal etikett"
+  },
+  "expand": {
+    "message": "📄 Expandera",
+    "description": "Expandera lång text"
+  },
+  "collapse": {
+    "message": "📄 Kollapsa",
+    "description": "Kollapsa lång text"
+  },
+  "exportToPDF": {
+    "message": "Exportera till PDF",
+    "description": "Exportera till PDF knapp"
+  },
+  "exportTxt": {
+    "message": "Exportera som TXT",
+    "description": "Exportera som TXT alternativ"
+  },
+  "exportCsv": {
+    "message": "Exportera som CSV",
+    "description": "Exportera som CSV alternativ"
+  },
+  "exportPdf": {
+    "message": "Exportera som PDF",
+    "description": "Exportera som PDF alternativ"
+  },
+  "upgradePro": {
+    "message": "Uppgradera Pro",
+    "description": "Uppgradera till Pro knapp text"
+  },
+  "manageSubscription": {
+    "message": "Hantera Prenumeration",
+    "description": "Hantera prenumeration knapp text för Pro användare"
+  },
+  "upgradeProTooltip": {
+    "message": "Uppgradera till Pro för obegränsade funktioner",
+    "description": "Tooltip för uppgradera knapp"
+  },
+  "manageSubscriptionTooltip": {
+    "message": "Hantera din Pro prenumeration",
+    "description": "Tooltip för hantera prenumeration knapp"
+  },
+  "copied": {
+    "message": "Kopierat till urklipp!",
+    "description": "Kopiera framgång meddelande"
+  },
+  "translationCopied": {
+    "message": "Översättning kopierad!",
+    "description": "Översättning kopiera framgång"
+  },
+  "moreItemsAvailable": {
+    "message": "fler objekt tillgängliga",
+    "description": "Fler objekt meddelande"
+  },
+  "unlimitedTranslations": {
+    "message": "Obegränsade översättningar med Pro!",
+    "description": "Pro översättningar meddelande"
+  },
+  "reachedTranslationLimit": {
+    "message": "Du har nått den gratis översättningsgränsen. Uppgradera till Pro för obegränsade översättningar!",
+    "description": "Översättningsgräns meddelande"
+  },
+  "confirmClearAll": {
+    "message": "Är du säker på att du vill rensa alla urklipp?",
+    "description": "Rensa allt bekräftelse"
+  },
+  "characters": {
+    "message": "tecken",
+    "description": "Tecken antal"
+  },
+  "justNow": {
+    "message": "Just nu",
+    "description": "Just nu tid"
+  },
+  "minutesAgo": {
+    "message": "$MINUTES$m sedan",
+    "description": "Minuter sedan",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "hoursAgo": {
+    "message": "$HOURS$h sedan",
+    "description": "Timmar sedan",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "daysAgo": {
+    "message": "$DAYS$d sedan",
+    "description": "Dagar sedan",
+    "placeholders": {
+      "days": {
+        "content": "$1"
+      }
+    }
+  },
+  "translate": {
+    "message": "Översätt",
+    "description": "Översätt knapp"
+  },
+  "pin": {
+    "message": "Fäst",
+    "description": "Fäst knapp"
+  },
+  "unpin": {
+    "message": "Lossa",
+    "description": "Lossa knapp"
+  },
+  "copy": {
+    "message": "Kopiera",
+    "description": "Kopiera knapp"
+  },
+  "delete": {
+    "message": "Radera",
+    "description": "Radera knapp"
+  },
+  "translating": {
+    "message": "Översätter...",
+    "description": "Översätter laddning"
+  },
+  "translationFailed": {
+    "message": "Översättning misslyckades. Försök igen.",
+    "description": "Översättning fel"
+  },
+  "saveToClipSmart": {
+    "message": "Spara till ClipSmart",
+    "description": "Kontextmeny objekt"
+  },
+  "openClipSmart": {
+    "message": "Öppna ClipSmart",
+    "description": "Kommando beskrivning"
+  },
+  "copyLastItem": {
+    "message": "Kopiera senaste urklipp",
+    "description": "Kommando beskrivning"
+  },
+  "sortBy": {
+    "message": "Sortera efter:",
+    "description": "Sortera etikett"
+  },
+  "newest": {
+    "message": "Nyaste",
+    "description": "Sortera alternativ"
+  },
+  "oldest": {
+    "message": "Äldsta",
+    "description": "Sortera alternativ"
+  },
+  "az": {
+    "message": "Alfabetiskt A-Ö",
+    "description": "Sortera alternativ"
+  },
+  "za": {
+    "message": "Alfabetiskt Ö-A",
+    "description": "Sortera alternativ"
+  },
+  "longest": {
+    "message": "Flest tecken",
+    "description": "Sortera alternativ"
+  },
+  "shortest": {
+    "message": "Minst tecken",
+    "description": "Sortera alternativ"
+  },
+  "premiumFeatures": {
+    "message": "Premium Funktioner",
+    "description": "Premium funktioner sektion titel"
+  },
+  "enablePremium": {
+    "message": "Aktivera Premium Läge",
+    "description": "Aktivera premium läge etikett"
+  },
+  "premiumModeActive": {
+    "message": "Premium Läge Aktivt",
+    "description": "Premium läge aktivt etikett"
+  },
+  "premiumIncludes": {
+    "message": "Premium funktioner inkluderar:",
+    "description": "Premium funktioner inkluderar etikett"
+  },
+  "unlimitedHistory": {
+    "message": "Obegränsad historik",
+    "description": "Obegränsad historik funktion"
+  },
+  "exportTxtCsvPdf": {
+    "message": "Exportera till TXT/CSV/PDF",
+    "description": "Export funktion"
+  },
+  "advancedTagging": {
+    "message": "Avancerad taggning",
+    "description": "Avancerad taggning funktion"
+  },
+  "unlimitedTranslationsPro": {
+    "message": "Obegränsade översättningar med Pro!",
+    "description": "Banner eller knapp för obegränsade översättningar med Pro version"
+  },
+  "tooltipTranslate": {
+    "message": "Översätt",
+    "description": "Tooltip för översätt knapp"
+  },
+  "tooltipPin": {
+    "message": "Fäst",
+    "description": "Tooltip för fäst knapp"
+  },
+  "tooltipUnpin": {
+    "message": "Lossa",
+    "description": "Tooltip för lossa knapp"
+  },
+  "tooltipCopy": {
+    "message": "Kopiera",
+    "description": "Tooltip för kopiera knapp"
+  },
+  "tooltipDelete": {
+    "message": "Radera",
+    "description": "Tooltip för radera knapp"
+  },
+  "tooltipExport": {
+    "message": "Exportera",
+    "description": "Tooltip för export knapp"
+  },
+  "toggleTheme": {
+    "message": "Växla tema",
+    "description": "Tooltip för tema växla knapp"
+  },
+  "themeAuto": {
+    "message": "Auto",
+    "description": "Tema alternativ auto"
+  },
+  "themeLight": {
+    "message": "Ljust",
+    "description": "Tema alternativ ljust"
+  },
+  "themeDark": {
+    "message": "Mörkt",
+    "description": "Tema alternativ mörkt"
+  },
+  "oneDay": {
+    "message": "1 dag",
+    "description": "Auto-radera 1 dag"
+  },
+  "sevenDays": {
+    "message": "7 dagar",
+    "description": "Auto-radera 7 dagar"
+  },
+  "thirtyDays": {
+    "message": "30 dagar",
+    "description": "Auto-radera 30 dagar"
+  },
+  "close": {
+    "message": "Stäng",
+    "description": "Stäng översättning knapp"
+  },
+  "pdfExportSuccess": {
+    "message": "PDF export lyckad!",
+    "description": "PDF export framgång meddelande"
+  },
+  "selectTranslationLanguage": {
+    "message": "Välj översättningsspråk:",
+    "description": "Välj översättningsspråk etikett"
+  }
+}
