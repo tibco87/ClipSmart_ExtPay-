@@ -59,6 +59,7 @@
   "shortest": { "message": "Najmniej znaków", "description": "Opcja sortowania" },
   "premiumFeatures": { "message": "Funkcje Premium", "description": "Tytuł sekcji premium" },
   "enablePremium": { "message": "Włącz tryb Premium", "description": "Etykieta włącz premium" },
+  "premiumModeActive": { "message": "Tryb Premium aktywny", "description": "Etykieta aktywnego trybu premium" },
   "premiumIncludes": { "message": "Funkcje premium obejmują:", "description": "Etykieta funkcje premium" },
   "unlimitedHistory": { "message": "Nieograniczona historia", "description": "Funkcja nieograniczonej historii" },
   "exportTxtCsvPdf": { "message": "Eksportuj do TXT/CSV/PDF", "description": "Funkcja eksportu" },

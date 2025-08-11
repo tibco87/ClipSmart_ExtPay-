@@ -242,6 +242,10 @@
     "message": "Activer le mode Premium",
     "description": "Label activer premium"
   },
+  "premiumModeActive": {
+    "message": "Mode Premium actif",
+    "description": "Label mode premium actif"
+  },
   "premiumIncludes": {
     "message": "Les fonctionnalités premium incluent :",
     "description": "Label inclut premium"

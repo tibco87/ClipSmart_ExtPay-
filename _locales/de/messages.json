@@ -242,6 +242,10 @@
     "message": "Premium-Modus aktivieren",
     "description": "Premium-Modus aktivieren Label"
   },
+  "premiumModeActive": {
+    "message": "Premium-Modus aktiv",
+    "description": "Premium-Modus aktiv Label"
+  },
   "premiumIncludes": {
     "message": "Premium-Funktionen beinhalten:",
     "description": "Premium-Funktionen beinhalten Label"

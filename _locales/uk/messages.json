@@ -59,6 +59,7 @@
   "shortest": { "message": "Найменше символів", "description": "Опція сортування" },
   "premiumFeatures": { "message": "Преміум функції", "description": "Заголовок розділу преміум функцій" },
   "enablePremium": { "message": "Увімкнути преміум режим", "description": "Мітка увімкнення преміум" },
+  "premiumModeActive": { "message": "Преміум режим активний", "description": "Мітка активного преміум режиму" },
   "premiumIncludes": { "message": "Преміум функції включають:", "description": "Мітка преміум функцій включають" },
   "unlimitedHistory": { "message": "Необмежена історія", "description": "Функція необмеженої історії" },
   "exportTxtCsvPdf": { "message": "Експорт в TXT/CSV/PDF", "description": "Функція експорту" },
