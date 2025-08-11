@@ -1,6 +1,6 @@
 {
   "appName": { "message": "ClipSmart", "description": "扩展名称" },
-  "appDescription": { "message": "永不丢失复制的文本。剪贴板管理器带15语言翻译器、搜索、标签。免费20项，专业版无限。", "description": "扩展描述" },
+  "appDescription": { "message": "永不丢失复制的文本。剪贴板管理器带18种语言翻译器、搜索、标签。免费20项，专业版无限。", "description": "扩展描述" },
   "recent": { "message": "最近", "description": "最近标签" },
   "pinned": { "message": "已固定", "description": "已固定标签" },
   "settings": { "message": "设置", "description": "设置标签" },
@@ -31,7 +31,7 @@
   "copied": { "message": "已复制到剪贴板！", "description": "复制成功消息" },
   "translationCopied": { "message": "翻译已复制！", "description": "翻译复制成功" },
   "moreItemsAvailable": { "message": "更多可用项目", "description": "更多项目消息" },
-  "unlimitedTranslations": { "message": "专业版无限翻译！", "description": "专业版翻译消息" },
+  "unlimitedTranslationsBanner": { "message": "专业版无限翻译！", "description": "专业版翻译横幅消息" },
   "reachedTranslationLimit": { "message": "您已达到免费翻译限制。升级到专业版获得无限翻译！", "description": "翻译限制消息" },
   "confirmClearAll": { "message": "确定要清除所有剪贴板项目吗？", "description": "清除所有确认" },
   "characters": { "message": "字符", "description": "字符计数" },
@@ -50,25 +50,25 @@
   "openClipSmart": { "message": "打开ClipSmart", "description": "命令描述" },
   "copyLastItem": { "message": "复制最后一个剪贴板项目", "description": "命令描述" },
   "items": { "message": "个项目", "description": "项目数量标签" },
-  "sortBy": { "message": "排序方式：", "description": "排序标签" },
+  "sortBy": { "message": "排序：", "description": "排序标签" },
   "newest": { "message": "最新", "description": "排序选项" },
   "oldest": { "message": "最旧", "description": "排序选项" },
-  "az": { "message": "字母顺序A-Z", "description": "排序选项" },
-  "za": { "message": "字母顺序Z-A", "description": "排序选项" },
-  "longest": { "message": "字符最多", "description": "排序选项" },
-  "shortest": { "message": "字符最少", "description": "排序选项" },
+  "az": { "message": "按字母A-Z", "description": "排序选项" },
+  "za": { "message": "按字母Z-A", "description": "排序选项" },
+  "longest": { "message": "最多字符", "description": "排序选项" },
+  "shortest": { "message": "最少字符", "description": "排序选项" },
   "premiumFeatures": { "message": "专业版功能", "description": "专业版功能部分标题" },
   "enablePremium": { "message": "启用专业版模式", "description": "启用专业版模式标签" },
-  "premiumIncludes": { "message": "专业版功能包括：", "description": "专业版功能包括标签" },
+  "premiumIncludes": { "message": "专业版包括：", "description": "专业版功能包括标签" },
   "unlimitedHistory": { "message": "无限历史记录", "description": "无限历史记录功能" },
-  "exportTxtCsvPdf": { "message": "导出为TXT/CSV/PDF", "description": "导出功能" },
+  "exportTxtCsvPdf": { "message": "导出TXT/CSV/PDF", "description": "导出功能" },
   "advancedTagging": { "message": "高级标签", "description": "高级标签功能" },
   "unlimitedTranslations": { "message": "无限翻译", "description": "无限翻译功能" },
   "tooltipTranslate": { "message": "翻译", "description": "翻译按钮提示" },
   "tooltipPin": { "message": "固定", "description": "固定按钮提示" },
   "tooltipUnpin": {
     "message": "取消固定",
-    "description": "Tooltip for unpin button"
+    "description": "取消固定按钮提示"
   },
   "tooltipCopy": { "message": "复制", "description": "复制按钮提示" },
   "tooltipDelete": { "message": "删除", "description": "删除按钮提示" },
@@ -84,11 +84,7 @@
   "thirtyDays": { "message": "30天", "description": "自动删除30天" },
   "unlimitedTranslationsPro": {
     "message": "专业版无限翻译！",
-    "description": "专业版无限翻译的横幅或按钮"
-  },
-  "items": {
-    "message": "项目",
-    "description": "Items label"
+    "description": "专业版无限翻译横幅"
   },
   "expand": {
     "message": "📄 展开",

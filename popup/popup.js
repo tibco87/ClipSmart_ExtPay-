@@ -925,7 +925,7 @@ class ClipSmart {
                     <option value="hu">Hungarian</option>
                     <option value="uk">Ukrainian</option>
                     <option value="tr">Turkish</option>
-                    <option value="zh">Chinese</option>
+                    <option value="zh">Mandarin Chinese</option>
                     <option value="ja">Japanese</option>
                     <option value="id">Indonesian</option>
                     <option value="ko">Korean</option>
