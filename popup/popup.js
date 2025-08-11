@@ -11,7 +11,7 @@ class ClipSmart {
         this.freeTranslationLimit = 5; // 5 prekladov mesačne pre free verziu
         this.translationsUsed = 0;
         this.isPro = false;
-
+        this.defaultTransLangs = ['en', 'de', 'fr'];
         this.tags = new Set();
         this.translationLimit = 5; // 5 prekladov mesačne pre free verziu
         this.availableLanguages = ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn'];
@@ -448,7 +448,8 @@ class ClipSmart {
         return {
             theme: 'auto',
             language: 'en',
-            autoDelete: 'never'
+            autoDelete: 'never',
+            translationLangs: ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn']
         };
     }
 
@@ -493,7 +494,25 @@ class ClipSmart {
             // updateUIText() sa nevolá pre zmenu auto-delete
         });
 
-
+        // Translation language selects
+        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn'];
+        ['transLang1', 'transLang2', 'transLang3'].forEach((id, index) => {
+            const select = document.getElementById(id);
+            // Vymaž existujúce možnosti
+            select.innerHTML = '';
+            langCodes.forEach(code => {
+                const option = document.createElement('option');
+                option.value = code;
+                option.textContent = code.toUpperCase();
+                select.appendChild(option);
+            });
+            select.value = this.settings.translationLangs[index] || langCodes[index];
+            select.addEventListener('change', (e) => {
+                this.settings.translationLangs[index] = e.target.value;
+                this.updateSetting('translationLangs', this.settings.translationLangs);
+                // updateUIText() sa nevolá pre zmenu translation languages
+            });
+        });
 
         // Clear all button
         document.getElementById('clearAllButton').addEventListener('click', () => {
@@ -1052,13 +1071,39 @@ class ClipSmart {
         // Update auto-delete select
         document.getElementById('autoDeleteSelect').value = this.settings.autoDelete;
         
-
+        // Update translation language selects
+        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'ko', 'hi'];
+        ['transLang1', 'transLang2', 'transLang3'].forEach((id, index) => {
+            const select = document.getElementById(id);
+            select.innerHTML = '';
+            langCodes.forEach(code => {
+                const option = document.createElement('option');
+                option.value = code;
+                option.textContent = code.toUpperCase();
+                select.appendChild(option);
+            });
+            select.value = this.settings.translationLangs[index] || langCodes[index];
+        });
+        
+        // Update translation quota
+        this.updateTranslationQuota();
         
         // Update premium mode checkbox
         this.updatePremiumModeCheckbox();
     }
 
-
+    updateTranslationQuota() {
+        const quotaElement = document.getElementById('translationQuota');
+        if (this.isPro) {
+            quotaElement.innerHTML = `<span class="quota-text">${this.getMessage('unlimitedTranslationsPro') || 'Unlimited translations'}</span>`;
+        } else {
+            quotaElement.innerHTML = `
+                <span class="quota-text">${this.getMessage('translationsUsed') || 'Translations used'}: 
+                    <strong>${this.translationsUsed}/${this.freeTranslationLimit}</strong> ${this.getMessage('thisMonth') || 'this month'}
+                </span>
+            `;
+        }
+    }
 
     updatePremiumModeCheckbox() {
         const premiumCheckbox = document.getElementById('premiumMode');
