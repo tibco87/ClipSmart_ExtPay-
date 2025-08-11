@@ -14,7 +14,7 @@ class ClipSmart {
         this.defaultTransLangs = ['en', 'de', 'fr'];
         this.tags = new Set();
         this.translationLimit = 5; // 5 prekladov mesačne pre free verziu
-        this.availableLanguages = ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'ko', 'hi', 'bn'];
+        this.availableLanguages = ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn'];
         this.sortOrder = 'newest'; // Predvolené zoradenie
         this.locale = 'en';
         this.messages = {};
@@ -449,7 +449,7 @@ class ClipSmart {
             theme: 'auto',
             language: 'en',
             autoDelete: 'never',
-            translationLangs: ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'ko', 'hi', 'bn']
+            translationLangs: ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'da', 'cs', 'sk', 'hu', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn']
         };
     }
 
@@ -495,7 +495,7 @@ class ClipSmart {
         });
 
         // Translation language selects
-        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'ko', 'hi', 'bn'];
+        const langCodes = ['en', 'de', 'fr', 'es', 'it', 'pl', 'da', 'cs', 'ru', 'uk', 'ar', 'tr', 'zh', 'ja', 'id', 'vi', 'ko', 'hi', 'bn'];
         ['transLang1', 'transLang2', 'transLang3'].forEach((id, index) => {
             const select = document.getElementById(id);
             // Vymaž existujúce možnosti
@@ -930,6 +930,7 @@ class ClipSmart {
                     <option value="zh">Mandarin Chinese</option>
                     <option value="ja">Japanese</option>
                     <option value="id">Indonesian</option>
+                    <option value="vi">Vietnamese</option>
                     <option value="ko">Korean</option>
                     <option value="hi">Hindi</option>
                     <option value="bn">Bengali</option>
